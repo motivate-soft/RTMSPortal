@@ -8763,9 +8763,9 @@ i.fa.fa-sort-asc, i.fa.fa-sort-desc {
 
 }
 .citation {
-    position: absolute;
-    bottom: -2px;
-    right: 2px;
+    position: absolute !important;
+    bottom: -2px !important;
+    right: 2px !important;
 }
 .flip-text{
     position: absolute;

@@ -103,7 +103,7 @@
                   <div class="panel-heading-menu sidebar-panel reportSidebarLink" >
                       <li>
                           <a [ngClass]="toggleHighlightedLink('home.reportsLanding')" (click)="navigate('home.reportsLanding')">
-                            <i class="fa fa-files-o fa-fw"></i><span class="menu-title">Reports</span></a>
+                            <i class="fa fa-files-o fa-fw"></i><span class="menu-title btn btn-outline btn-rounded btn-primary">Reports</span></a>
                       </li>
                   </div>
               </div>
@@ -112,7 +112,7 @@
               <div class="panel panel-default sidebar-panel">
                   <div class="panel-heading-menu sidebar-panel">
                       <li>
-                          <a [ngClass]="toggleHighlightedLink('home.inbox')" (click)="navigate('home.inbox')"><i class="fa fa-envelope"></i><span class="menu-title">Inbox</span></a>
+                          <a [ngClass]="toggleHighlightedLink('home.inbox')" (click)="navigate('home.inbox')"><i class="fa fa-envelope"></i><span class="menu-title btn btn-outline btn-rounded btn-primary">Inbox</span></a>
                       </li>
                   </div>
               </div>
@@ -122,7 +122,7 @@
             <div class="panel panel-default sidebar-panel">
                 <div class="panel-heading-menu sidebar-panel">
                     <li>
-                        <a [ngClass]="toggleHighlightedLink('home.documentation')" (click)="navigate('home.documentation')"><i class="fab fa-dropbox"></i><span class="menu-title">Documentation</span></a>
+                        <a [ngClass]="toggleHighlightedLink('home.documentation')" (click)="navigate('home.documentation')"><i class="fab fa-dropbox"></i><span class="menu-title btn btn-outline btn-rounded btn-primary">Documentation</span></a>
                     </li>
                 </div>
             </div>
@@ -132,7 +132,7 @@
             <div class="footer">
               <div class="footer-content reportSmallFont">Version <span [innerHTML]="_version"></span></div>
                 <div class="footer-content reportSmallFont" *ngIf="_isSidebarExpanded">
-                    <a href="mailto:help@realtimemed.com">help@realtimemed.com</a><br>
+                    <a class="contact-mailto" href="mailto:help@realtimemed.com" style="color:blue">help@realtimemed.com</a><br>
                     888.546.9786<br>
                     &copy;{{_currentYear}} Real Time Medical Systems LLC<br>
                 </div>

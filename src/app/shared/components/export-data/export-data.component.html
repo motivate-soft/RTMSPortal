@@ -4,7 +4,8 @@
   class="padding-x-sm">
   <div class="export-button"  id="Hamburger_{{reportId}}">
     <button class="btn green btn-outline dropdown-toggle pull-right" data-toggle="dropdown" aria-expanded="false">
-      <i [ngClass]="{'export-enabled': ! exportDisabled}" class="fa fa-bars" style="color:black"></i>
+      <i *ngIf="!exportDisabled" class="fa fa-file-export" style="color:black"></i>
+      <i *ngIf="exportDisabled" class="fa fa-expand-arrows-alt" style="color:black"></i>
     </button>
     <ul class="dropdown-menu pull-right">
       <li *ngIf="! exportDisabled">

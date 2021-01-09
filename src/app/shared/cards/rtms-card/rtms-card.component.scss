@@ -6,3 +6,9 @@
     max-height: none;
     height: calc(100vh - 193px);
 }
+
+.citation {
+    position: absolute !important;
+    bottom: -2px !important;
+    right: 2px !important;
+}
