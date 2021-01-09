@@ -1,0 +1,10 @@
+<div>
+  <div class="card-info" style="position: relative" id="Citation_{{reportId}}">
+    <a [hidden]="!showInfo"  (click)="getChartInformationData($event.currentTarget)" title="Click here for more information about this chart."
+       angulartics2On 
+       angularticsAction="GetChartInfo" 
+       [angularticsProperties]="getAngularticsProperties()">
+      <i class="fa fa-info-circle fa-2x"></i>
+    </a>
+  </div>
+</div>

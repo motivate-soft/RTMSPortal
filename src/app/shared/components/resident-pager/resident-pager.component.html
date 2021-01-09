@@ -1,0 +1,26 @@
+<span class="resident-wrapper">
+        <span class="ngSelect">
+            <div class="header-selector header-selector-size care-transition-contorl-size">
+                <ng-select [items]="_residents" bindLabel="Resident" bindValue="ResMRN" [clearable]="false"
+                    [(ngModel)]="_selectedResMRN" (change)="onItemSelect($event)" class="custom">
+                </ng-select>
+            </div>
+        </span>
+        <span class="ngSelect" [hidden]="!showRoomBedSort">
+            <div class="header-selector sort-control-size">
+                <ng-select [items]="_residentSortBy" bindLabel="label" bindValue="id" [clearable]="false"
+                    [(ngModel)]="_selectedResidentSortBy" (change)="onChangeSort($event)" class="custom">
+                </ng-select>
+            </div>
+        </span>
+        <span class="pull-right" class="hidden-xs hidden-sm">
+        <a ng-href='#here' [attr.disabled]="isPreviousDisabled()"
+            [ngClass]="{'nav-btn-disabled':isPreviousDisabled(),'nav-btn-enabled':!isPreviousDisabled()}"
+            class='pager-btn' (click)='getPreviousResident()'><i
+                class="fa fa-arrow-circle-left pager-btn-icon "></i></a>&nbsp;&nbsp;&nbsp;
+        <a ng-href='#here' [attr.disabled]="isNextDisabled()"
+            [ngClass]="{'nav-btn-disabled':isNextDisabled(),'nav-btn-enabled':!isNextDisabled()}" class='pager-btn'
+            (click)='getNextResident()'><i class="fa fa-arrow-circle-right pager-btn-icon"></i></a>
+        </span>
+
+</span>

@@ -1,0 +1,70 @@
+<div class="full-height" *ngIf="(data.cardType === 'bar' || data.cardType === 'pie' || data.cardType === 'line' || data.cardType === 'horizontal-bar')">
+  <rtms-chart [chartConfig]="data.chartConfig" [seriesData]="data.seriesData" [allowOnClick]="data.allowOnClick && data.hasData"
+    (onChartColumnClick)="onChartClick.emit($event)">
+  </rtms-chart>
+</div>
+<div *ngIf="data.cardType === 'gaugeCollection'" class="full-height">
+  <span *ngIf="data.seriesData && data.seriesData.length > 0 ">
+    <rtms-gauge-collection [chartName]="data.chartName" [reportId]="data.reportId"
+      [drillsIntoReportId]="data.drillsIntoReportId" [seriesData]="data.seriesData"
+      (gaugeClick)="onChartClick.emit($event)" [creditText]="data.creditText" [templateId]="data.templateId"
+      [facilityId]="data.facilityId" [allowOnClick]="data.allowOnClick" [chartConfig]="data.chartConfig"
+      [singleColumn]="data.singleColumn" [isMarketingMode]="data.isMarketingMode">
+    </rtms-gauge-collection>
+  </span>
+</div>
+<div *ngIf="data.cardType === 'grid'" class="full-height">
+  <div class="pull-right" style="padding-right: 1%">{{data.disclaimerText}}</div>
+  <rtms-grid [options]="data.options" [rowData]="data.seriesData"
+    [reportId]="data.reportId" [showSearch]="data.showSearch"
+    [allowScrollSelectedRow]="data.allowScrollSelectedRow" [hideFooter]="data.hideFooter"  [noDataMessage]="data.noDataMessage" (rowClick)="gridRowClick.emit($event)"
+    (gridCellDrillDown)="gridCellClick.emit($event)">
+  </rtms-grid>
+</div>
+<div *ngIf="data.cardType === 'gridCard'" class="full-height">
+  <rtms-grid-card [chartConfig]="data.chartConfig" [seriesData]="data.seriesData" [gridOptions]="data.gridOptions" [drillsIntoReportId]="data.drillsIntoReportId"
+    [reportId]="data.reportId"  [drilldownDestination]="data.drilldownDestination">
+  </rtms-grid-card>
+</div>
+<div *ngIf="data.cardType === 'residentDetail'" class="full-height">
+  <rtms-resident-detail-card [seriesData]="data.seriesData"></rtms-resident-detail-card>
+</div>
+<div *ngIf="data.cardType === 'residentDetailCareTransitions'" class="full-height">
+  <rtms-resident-detail-care-transitions [seriesData]="data.seriesData"></rtms-resident-detail-care-transitions>
+</div>
+<div *ngIf="data.cardType === 'residentSocialServices'" class="full-height">
+  <rtms-resident-social-services [seriesData]="data.seriesData"></rtms-resident-social-services>
+</div>
+<div *ngIf="data.cardType === 'unorderedList'">
+    <rtms-unordered-list [chartConfig]="data.chartConfig" [seriesData]="data.seriesData">
+    </rtms-unordered-list>
+  </div>
+<div *ngIf="data.cardType === 'numberWidget'" class="full-height">
+  <rtms-number-widget *ngIf="data.tableData && data.tableData.length > 0" [ngClass]="(data.allowOnClick) ? 'table-actions' : ''"
+    [data]="data.tableData" [options]="data.numberWidgetConfiguration"
+    [drilldownDestination]="data.drilldownDestination" [drilldownReport]="data.drilldownReport"
+    [allowOnClick]="data.allowOnClick" [templateId]="data.templateId" [reportId]="data.reportId" [filterType]="data.filterType"
+    [drillsIntoReportId]="data.detailDashboardId" (onNumberWidgetClick)="onChartClick.emit($event)">
+  </rtms-number-widget>
+</div>
+<div *ngIf="data.cardType === 'quilt'" class="full-height">
+  <rtms-quilt *ngIf="data.tableData && data.tableData.length > 0" [ngClass]="(data.allowOnClick) ? 'table-actions' : ''"
+    [data]="data.tableData" [options]="data.numberWidgetConfiguration"
+    [drilldownDestination]="data.drilldownDestination" [drilldownReport]="data.drilldownReport"
+    [allowOnClick]="data.allowOnClick" [templateId]="data.templateId" [reportId]="data.reportId" [filterType]="data.filterType"
+    [drillsIntoReportId]="data.detailDashboardId" (onNumberWidgetClick)="onChartClick.emit($event)">
+  </rtms-quilt>
+</div>
+<div *ngIf="data.cardType === 'mdsDashDetail'" class="full-height">
+    <rtms-mds-dash-detail [data]="data"></rtms-mds-dash-detail>
+</div>
+<div *ngIf="data.cardType === 'pdpmWorksheet'" class="full-height">
+  <rtms-pdpm-worksheet [data]="data"></rtms-pdpm-worksheet>
+</div>
+<div *ngIf="data.cardType === 'ipaAlert'" class="full-height">
+  <rtms-ipa-alert [data]="data"></rtms-ipa-alert>
+</div>
+<div class="citation" *ngIf="hasCitation">
+  <rtms-information [chartName]="data.chartName" [reportId]="data.reportId" [embedChart]="!data.hasData ? false : data.embedChart">
+  </rtms-information>
+</div>

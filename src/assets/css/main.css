@@ -1,0 +1,1673 @@
+/*$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower*/
+
+
+/* Sidebar */
+
+.panel-group .sidebar-panel {
+  background-color: #1f1f1f;
+  border-color: #1f1f1f;
+  border-radius: 0;
+}
+
+.panel-heading-menu {
+  padding: 15px 15px 15px 0;
+}
+
+.nav .list-group-item {
+  padding: 0;
+  margin-top: -1px;
+  background-color: #405058;
+  border: 1px solid #1f1f1f;
+}
+
+.sidebar-navigation-menu {
+  padding-bottom: 110px; /*footer height*/
+}
+
+/* Sidebar END */
+
+
+/* Top Bar */
+
+.user-parent .user-child {
+  display: block;
+}
+
+/* Top Bar END */
+
+
+/* Page Title */
+
+ul.breadcrumb li {
+  display: inline;
+}
+
+  ul.breadcrumb li + li:before {
+      padding: 8px;
+      color: #000;
+      content: "/\00a0";
+  }
+
+.errorText {
+  color: red;
+  font-weight: 700
+}
+
+.dashboard-breadcrumb-margins {
+  margin-top: 14px;
+}
+
+.page-title-breadcrumb .page-header .page-title .dashboard-filter-margin {
+  margin-right: 20px;
+}
+
+/* Page Title END */
+
+
+/* Dropdown */
+
+.dropdown-menu > li > .exportDropDownMenu {
+  padding: 3px 20px 3px 6px;
+  color: #262626;
+}
+
+.exportDropDownMenu .menu-icon {
+  position: relative;
+  bottom: -2px;
+  font-size: 16px; /*or 140%*/
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown .dropdown-menu {
+  margin-top: 0;
+}
+
+/* Dropdown END */
+
+
+/* Div Table */
+
+.divtblHeader {
+  margin-top: 25px;
+  border-bottom: solid;
+  border-bottom-color: #d3d3d3;
+  border-bottom-width: 2px;
+}
+
+.divtblRow {
+  border-bottom: solid;
+  border-bottom-color: #d3d3d3;
+  border-bottom-width: 1px;
+  margin-bottom: 3px;
+}
+
+.divtblRowLastTop {
+  border-top: solid;
+  border-top-color: #d3d3d3;
+  border-top-width: 1px;
+}
+
+/* Div Table END*/
+
+
+/* Agent Dashboard. Probably deprecated */
+
+.bodyBodyMargin {
+  margin-bottom: 90px;
+}
+
+/* Agent Dashboard END */
+
+
+/* Loader */
+
+.loading #loaderDiv {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+  background-color: white;
+  opacity: .7;
+}
+
+.no-global-spinner #loaderDiv {
+  display: none !important;
+}
+
+.cg-busy-active .noDataDiv {
+  display: none;
+}
+
+.ajax-loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* Loader END */
+
+
+/* Multiselect */
+
+.multiselect-parent .dropdown-toggle {
+  width: 100%;
+}
+
+.multiselect-parent .dropdown-menu {
+  width: 100%;
+}
+
+/* Multiselect END */
+
+
+/* Panel */
+
+.panel-heading-title,
+.panel-heading-date {
+  font-size: 13px;
+}
+
+
+.panel-heading-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 10px);
+  display: inline-block;
+  padding-right: 2px;
+}
+
+.panel-heading-title.with-filter {
+  width: calc(100% - 130px);
+}
+
+.large-card-filter .panel-heading-title.with-filter {
+  width: calc(100% - 160px);
+}
+
+.panel .panel-body {
+  min-height: 272px;
+}
+
+/* Panel END*/
+
+
+/*Report pagination*/
+
+.report-pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  height: 48px;
+}
+
+  .report-pagination .pager .item > .trigger {
+      color: #0074bd;
+      cursor: pointer;
+  }
+
+      .report-pagination .pager .item > .trigger:active {
+          background-color: #e6e6e6;
+      }
+
+      .report-pagination .pager .item > .trigger.disabled,
+      .report-pagination .pager .item > .trigger.disabled:hover,
+      .report-pagination .pager .item > .trigger.disabled:focus,
+      .report-pagination .pager .item > .trigger.disabled:active {
+          color: #aaaaaa;
+          background-color: #fff;
+          cursor: default;
+      }
+
+/*Report pagination END*/
+
+
+/* Table */
+
+.row_selected {
+  background-color: #ee7b06 !important;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+tr.row_selected td {
+  background-color: #ee7b06 !important;
+}
+
+
+/*
+NOTE:
+Use bootstrap classes to align text in headers.
+Classes bellow are only for table content/values
+And different only for semantics
+*/
+
+.col-content-text {
+  text-align: left;
+}
+
+.col-content-big-number { /* more than 6 digits */
+  text-align: right;
+}
+
+.col-content-small-number { /* up to 6 digits */
+  text-align: right;
+  width: 45px;
+  margin: 0 auto;
+}
+
+.col-content-date, /* When date always has the same length */
+.col-content-single-char, /* Single char or digit */
+.col-content-similar { /* When content has the same length */
+  text-align: center;
+}
+
+
+
+/* Table END*/
+
+
+/* Reports */
+
+.reports_background {
+  background-color: white;
+}
+
+.reports_padding {
+  padding-left: 5px;
+}
+
+.reports_plussign {
+  float: left;
+}
+
+.reports_plussign_resident {
+  margin-left: 2px;
+  color: black;
+}
+
+.detail_search_topmargin {
+  margin-top: 3px;
+}
+
+.detail_search input {
+  max-width: 100%;
+}
+
+.dashboard-facillty-name {
+  font-size: 14pt;
+  vertical-align: middle;
+}
+
+.header-facilityicon {
+  width: 20pt;
+}
+
+.header-facilityicon-margin {
+  margin-bottom: 5px;
+}
+
+.reportSmallFont {
+  font-size: 11px;
+}
+
+  .reportSmallFont .table i {
+      font-size: 11px;
+      line-height: 11px;
+  }
+
+.adlDetailFontNormal {
+  font-size: 9px;
+}
+
+.adlDetailSmallNormal {
+  font-size: 6px;
+}
+
+/* Reports END */
+
+
+/* Fixed Height Report */
+
+.page-content .fixed-height-report {
+  overflow: hidden;
+  height: calc(100vh - 174px); /*174px - height of header, breadcrumbs, help button and margins combined*/
+  min-height: 250px;
+}
+
+
+  .page-content .fixed-height-report.fullscreen-done {
+      height: auto;
+  }
+
+.page-content .fh-report-short { /*Bottom report*/
+  height: calc(100vh - 494px); /*558px - height of the chart panel + calcs above */
+}
+
+.fh-report-short-extra { /*Bottom report*/
+  height: calc(100vh - 580px) !important; /*558px - height of the chart panel + calcs above */
+}
+
+.page-content .row .fixed-height-report > .panel {
+  position: absolute;
+  width: calc(100% - 30px); /*30 - margins*/
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.page-content .row .fixed-height-report.fullscreen-done > .panel {
+  width: 100%;
+}
+
+.fixed-height-report .panel .fh-report-table {
+  position: absolute;
+  width: calc(100% - 30px); /*30 - margins*/
+  top: 60px;
+  height: calc(100% - 90px); /*90 - report title height + info icon height*/
+  overflow: hidden;
+  padding-top: 51px;
+}
+
+.no-fixed-headers.fixed-height-report .panel .fh-report-table {
+  padding-top: 0;
+}
+
+.fixed-height-report .panel .report-pagination-parent .fh-report-table {
+  height: calc(100% - 102px); /*102px - report title height + pagination height*/
+}
+
+.fixed-height-report .fh-report-table .table {
+  margin-bottom: 0;
+}
+
+.fh-tables-count-2 .panel .fh-report-table {
+  top: 55px;
+  height: calc((100% - 85px)/2); /* 85 - three 15px margins + 40px header */
+}
+
+  .fh-tables-count-2 .panel .fh-report-table:nth-of-type(2) {
+      top: calc(70px + (100% - 85px) / 2); /* 85 - three 15px margins + 40px header, 70 - two 15px margins + 40px header*/
+  }
+
+.fixed-height-report .fh-report-table .table .th-one-line {
+  padding: 0;
+}
+
+.fixed-height-report .fh-report-table .table .th-two-line {
+  padding: 5px 0;
+}
+
+.fh-double-tables .panel .fh-report-table {
+  padding-top: 0;
+  overflow-x: auto;
+  background: #FFF;
+}
+
+.fixed-height-report .panel .fh-report-table > .fh-report-table-title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+  background: #F1F1F1;
+}
+
+.fh-double-tables .panel .fh-report-table > .fh-report-table-title {
+  position: absolute;
+  height: 71px;
+  width: auto;
+  min-width: 100%;
+  overflow-y: hidden;
+  display: inline-block;
+}
+
+.fixed-height-report .fh-report-table > .fh-report-table-title th,
+.fixed-height-report .fh-report-table > .fh-report-table-content thead th {
+  padding: 0 8px;
+}
+
+.fh-short-title .panel .fh-report-table > .fh-report-table-title {
+  height: 51px;
+}
+
+.fixed-height-report .fh-report-table .fh-report-table-content {
+  position: relative;
+  height: 100%;
+  min-width: 100%;
+  overflow-y: auto;
+}
+
+.fh-double-tables .panel .fh-report-table .fh-report-table-content {
+  height: calc(100% - 71px);
+  margin-top: 71px;
+  display: inline-block;
+}
+
+.fh-short-title .panel .fh-report-table .fh-report-table-content {
+  height: calc(100% - 51px);
+  margin-top: 51px;
+}
+
+.fh-double-tables .panel .fh-report-table .fh-report-table-content .table {
+  margin-top: -71px;
+}
+
+.fh-short-title .panel .fh-report-table .fh-report-table-content .table {
+  margin-top: -51px;
+}
+
+.fixed-height-report .fh-report-table thead th:first-child {
+  height: 55px;
+  max-height: 100px;
+}
+
+.fh-short-title .fh-report-table thead th:first-child {
+  height: 50px;
+  max-height: 50px;
+}
+
+.fh-report-table.two-line-header thead th:first-child {
+  height: 45px;
+}
+
+.fh-report-table.three-line-header thead th:first-child {
+  height: 21px;
+}
+
+
+/* Fixed Height Report END*/
+
+
+.multi-report-item:not(:last-of-type) {
+  padding-bottom: 20px;
+}
+
+  .multi-report-item:not(:last-of-type):after {
+      content: '';
+      display: block;
+      margin-top: 20px;
+      border-bottom: solid 1px #f0f2f5;
+      width: 100%;
+      padding: 0 16px;
+      margin-left: -16px;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+  }
+
+.multi-report .table-container {
+  background-color: #fff;
+  overflow: auto;
+  padding-top: 0;
+}
+
+.multi-report .tName {
+  display: block;
+  font-size: 13px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  line-height: 11px;
+}
+
+.multi-report .table {
+  margin-bottom: 0;
+}
+
+
+/* Multi Report END*/
+
+/* Financial Table Report */
+
+.financialdetail_table_short {
+  max-height: 304px;
+}
+
+
+.financialdetail_table_medium {
+  max-height: 583px;
+}
+
+.financialdetail_tablemds {
+  height: 475px;
+}
+
+.financedetail_footertable {
+  height: 160px;
+}
+
+/* Financial Table Report END */
+
+
+/* ADL MDS Table Report */
+
+.adlMdsTableFont {
+  font-size: 10px;
+}
+
+.detail_padding_left {
+  padding-left: 25px;
+}
+
+
+/* ADL MDS Table Report END */
+
+
+/* Clinical Table Report */
+
+.clinicaldetail_footertable {
+  height: 240px;
+}
+
+/* Clinical Table Report END*/
+
+
+/* Corporate Table Report */
+
+.chart-facility-name {
+  background-color: #0074bd;
+  color: white;
+  font-weight: 600;
+  font-size: larger;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-left: 15px;
+  height: 30px;
+}
+
+.chart-facility-name-padding {
+  display: block;
+  padding-top: 3px;
+}
+
+/* Corporate Table Report END */
+
+
+/* Footer */
+
+.feedbackbtn {
+  margin-right: 10px;
+}
+
+/* Footer END */
+
+
+/* Flexible Count */
+
+.flexible-cont {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .flexible-cont .flexible-cont__flex-item {
+      flex: 0 1 128px;
+      text-align: center;
+      margin: 7px;
+  }
+
+  .flexible-cont a.flexible-cont__link,
+  .flexible-cont a.flexible-cont__link:visited {
+      display: inline-block;
+      width: 128px;
+      padding: 7px;
+      padding-top: 25px;
+      cursor: pointer;
+      background: transparent;
+      text-decoration: none;
+      color: #3a3a3a;
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+  }
+
+      .flexible-cont a.flexible-cont__link:hover {
+          background-color: #f3f3f3;
+      }
+
+  .flexible-cont .flexible-cont__icon-img {
+      border: 0 none;
+      padding: 0;
+      margin: 0;
+  }
+
+  .flexible-cont .flexible-cont__icon-title {
+      margin-top: 10px;
+      text-decoration: none;
+  }
+
+/* Flexible Count END*/
+
+
+/* User Alert Message */
+
+.user-alert-message {
+  font-weight: 700;
+  color: #ff0000;
+}
+
+/* User Alert Message END */
+
+
+/* Inbox */
+
+.inboxViewedRowsColor {
+  background-color: #e6e6e6;
+}
+
+.inboxUnReadRowsColor {
+  background-color: #fff;
+  font-weight: bold;
+}
+
+/* Inbox END*/
+
+
+/* Chart */
+
+.tocCARDScores .chart-container-wrapper {
+  justify-content: space-around;
+  display: grid;
+}
+
+.rehospDashboardChart .chart-container-wrapper {
+  justify-content: space-around;
+  display: flex;
+}
+
+.chart-container-wrapper {
+  overflow: hidden; /* important to keep, because of resize overlap */
+}
+
+.chart-container {
+  width: 100%;
+  height: 230px;
+  margin: 0 auto;
+}
+/* Chart END */
+
+
+/* Fullscreen modal */
+
+/*------ Snippets*/
+
+.fullscreen.fullscreen-started .hide-on-fullscreen,
+.fullscreen.fullscreen-done .hide-on-fullscreen,
+.fullscreen:not(.fullscreen-started) .show-on-fullscreen,
+.fullscreen:not(.fullscreen-done) .show-on-fullscreen {
+  display: none;
+}
+
+/*------ Snippets END*/
+
+
+.fullscreen-background {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.fullscreen-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+  .fullscreen-background:not(.show) {
+      display: none;
+  }
+
+  .fullscreen-background:not(.visible) {
+      opacity: 0;
+  }
+
+
+.fullscreen.fullscreen-started {
+  position: fixed;
+  z-index: 99999;
+}
+
+
+.fullscreen.fullscreen-done {
+  position: fixed;
+  z-index: 99999;
+  top: 50px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+
+.fullscreen-close-btn {
+  position: fixed;
+  top: 10px;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  margin: auto;
+  width: 200px;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  background: transparent;
+  border: solid 1px rgba(255, 255, 255, 0.4);
+  -webkit-transition: 0.3s transform linear;
+  -moz-transition: 0.3s transform linear;
+  -ms-transition: 0.3s transform linear;
+  -o-transition: 0.3s transform linear;
+  transition: 0.3s transform linear;
+}
+
+  .fullscreen-close-btn:not(.show) {
+      display: none;
+  }
+
+  .fullscreen-close-btn:hover,
+  .fullscreen-close-btn:focus {
+      outline: none !important;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      border: solid 1px rgba(255, 255, 255, 0.6);
+  }
+
+  .fullscreen-close-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 1);
+      border: solid 1px rgba(255, 255, 255, 1);
+  }
+
+
+.fullscreen-close-btn {
+  -webkit-transform: translateY(-100px);
+  -moz-transform: translateY(-100px);
+  -ms-transform: translateY(-100px);
+  -o-transform: translateY(-100px);
+  transform: translateY(-100px);
+}
+
+  .fullscreen-close-btn.visible,
+  .fullscreen-close-btn.visible {
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+      transform: translateY(0);
+  }
+
+
+  .fullscreen-close-btn .menu-icon {
+      position: relative;
+      top: 1px;
+      float: left;
+      font-size: 16px;
+  }
+
+.page-content .fullscreen-started .fh-report-short,
+.page-content .fullscreen-done .fh-report-short {
+  height: 100%;
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.page-content .row .fullscreen-started .fixed-height-report > .panel,
+.page-content .row .fullscreen-done .fixed-height-report > .panel {
+  width: 100%;
+}
+
+.page-content .fullscreen.fullscreen-started .panel:not(.panel-orange),
+.page-content .fullscreen.fullscreen-done .panel:not(.panel-orange) {
+  max-height: none;
+  height: 100%;
+}
+
+.highcharts-credits {
+  cursor: default !important
+}
+
+.page-content .fullscreen.fullscreen-started .panel .highcharts-container,
+.page-content .fullscreen.fullscreen-done .panel .highcharts-container {
+  /*position: absolute !important;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
+.fullscreen-started .panel-heading ~ .panel-body,
+.fullscreen-done .panel-heading ~ .panel-body {
+  position: relative;
+  height: calc(100% - 40px);
+}
+
+.fullscreen-started .chart-container-wrapper,
+.fullscreen-done .chart-container-wrapper,
+.fullscreen-started .chart-container,
+.fullscreen-done .chart-container {
+  position: relative;
+  height: 100%;
+}
+
+.page-content .fullscreen-started .fixed-height-report,
+.page-content .fullscreen-done .fixed-height-report {
+  height: 100%;
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+  .page-content .fullscreen-started .fixed-height-report .panel .fh-report-table,
+  .page-content .fullscreen-done .fixed-height-report .panel .fh-report-table,
+  .fullscreen-started.fixed-height-report .panel .fh-report-table,
+  .fullscreen-done.fixed-height-report .panel .fh-report-table {
+      top: 15px;
+      height: calc(100% - 30px);
+  }
+
+.page-content .fullscreen-started .panel-content,
+.page-content .fullscreen-done .panel-content {
+  height: 100%;
+}
+
+.fullscreen-started .financialdetail_table_short,
+.fullscreen-done .financialdetail_table_short {
+  max-height: 100%;
+}
+
+.page-content .fullscreen-started .fh-tables-count-2 .panel .fh-report-table,
+.page-content .fullscreen-done .fh-tables-count-2 .panel .fh-report-table {
+  top: 15px;
+  height: calc((100% - 45px)/2);
+}
+
+  .page-content .fullscreen-started .fh-tables-count-2 .panel .fh-report-table:nth-of-type(2),
+  .page-content .fullscreen-done .fh-tables-count-2 .panel .fh-report-table:nth-of-type(2) {
+      top: calc(30px + (100% - 45px) / 2);
+  }
+
+.fullscreen-started .panel.multi-report:not(.panel-orange),
+.fullscreen-done .panel.multi-report:not(.panel-orange) {
+  min-height: 100%;
+}
+.fullscreen-done .fh-report-table.pdpm-report {
+  top: 30px !important;
+}
+
+/* Fullscreen modal END */
+
+
+/* See and replace with .col-content-small-number */
+.narrow-column {
+  width: 50px;
+}
+
+.wide-column {
+  min-width: 300px;
+}
+
+.multiselect-parent {
+  width: 100% !important;
+}
+
+.vertical {
+  writing-mode: tb-rl;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  white-space: nowrap;
+  bottom: 0;
+  height: 20px;
+}
+
+.qrp-tblheader {
+  text-align: center;
+  cursor: default !important;
+}
+
+.qrp-tbl-detail {
+  min-height: 65px;
+  text-align: center;
+}
+
+.inbox-noreport-text {
+  margin-top: 15%;
+  font-size: 2em;
+}
+
+.inbox-noreport-icon {
+  font-size: 6em !important;
+}
+
+
+.adlmdsOverrideForPaging {
+  top: 60px !important;
+}
+
+.portalusage-noPadding {
+  padding: 0px 15px 0px 10px !important;
+}
+
+/*info popup styles*/
+.no-left-right-padding {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.card-panel .number-widget-card {
+  display: block;
+  width: 100%;
+}
+
+.card-panel .card-info {
+  text-align: left;
+  padding: 2px 2px !important;
+  min-height: 28px;
+}
+
+  .card-panel .card-info a {
+      color: #428bca;
+      text-decoration: none;
+  }
+
+      .card-panel .card-info a:hover {
+          color: #f46f34;
+          text-decoration: none;
+      }
+
+.info-modal {
+  z-index: 1000001 !important;
+  overflow: auto !important;
+}
+
+  .info-modal .modal-dialog {
+      z-index: 100000 !important;
+      width: 75%;
+      margin: 0;
+      top: 5%;
+      position: absolute;
+      left: 12.5%;
+      opacity: 0 !important;
+      -webkit-transform: scale(0.1) !important;
+      -ms-transform: scale(0.1) !important;
+      -o-transform: scale(0.1) !important;
+      transform: scale(0.1) !important;
+      -webkit-transition: all 0.3s ease-in-out 0.2s !important;
+      -o-transition: all 0.3s ease-in-out 0.2s !important;
+      transition: all 0.3s ease-in-out 0.2s !important;
+  }
+
+  .info-modal.in .modal-dialog {
+      opacity: 1 !important;
+      -webkit-transform: scale(1) !important;
+      -ms-transform: scale(1) !important;
+      -o-transform: scale(1) !important;
+      transform: scale(1) !important;
+  }
+
+  .info-modal .modal-dialog .modal-content .modal-title {
+      font-size: x-large;
+      font-weight: bold;
+  }
+
+  .info-modal .modal-dialog .modal-content {
+      background-color: #f9f9f9 !important;
+      border-radius: 0px !important;
+  }
+
+      .info-modal .modal-dialog .modal-content .modal-header {
+          border-bottom: none !important;
+      }
+
+      .info-modal .modal-dialog .modal-content .modal-body {
+          padding: 0px !important;
+      }
+
+          .info-modal .modal-dialog .modal-content .modal-body .title {
+              font-size: 12px;
+              font-weight: bold;
+          }
+
+          .info-modal .modal-dialog .modal-content .modal-body .subtitle {
+              font-size: 10px;
+              text-align: justify !important;
+          }
+
+          .info-modal .modal-dialog .modal-content .modal-body .desc {
+              font-size: 12px;
+              text-align: justify !important;
+          }
+
+      .info-modal .modal-dialog .modal-content .modal-footer {
+          border-top: none !important;
+          text-align: center !important;
+      }
+
+  .info-modal .info-footer .btn-info {
+      height: 40px;
+      width: 90px;
+      font-size: 15px;
+      font-weight: bold;
+  }
+
+  .info-modal .info-chart {
+      margin-right: 20px;
+      padding-bottom: 0px !important;
+      border: lightgrey 5px solid;
+  }
+
+      .info-modal .info-chart .panel {
+          margin-bottom: 0px;
+      }
+
+.incompatible-container {
+  width: 50%;
+  text-align: center;
+  margin-left: 27%;
+  margin-top: 7%;
+  border: 1px solid grey;
+  background-color: #ffffff;
+}
+
+.incompatible-browserlist {
+  margin-left: 15px;
+}
+
+.incompatible-browserlist-item {
+  width: 125px;
+  text-align: left;
+}
+
+.incompatible-paragraph {
+  text-align: left;
+  padding: 5px 10px 5px 20px;
+}
+
+.keyword-immediate {
+  color: red;
+}
+
+
+.qmsummary {
+  height: 50% !important;
+}
+
+  .qmsummary .panel {
+      width: 100% !important;
+  }
+
+  .qmsummary .fullscreen-holder {
+      height: calc((100vh - 170px)/2);
+  }
+
+  .qmsummary .fh-report-table {
+      top: auto !important;
+      height: calc((100% - 160px)/2) !important;
+  }
+
+.fullscreen-done .fh-report-table {
+  height: calc(100% - 30px) !important;
+}
+
+.portalusage .fh-short-title .fh-report-table thead th:first-child {
+  height: 25px;
+  max-height: 50px;
+}
+
+.residentscore {
+  padding-right: 5px;
+  float: left !important;
+}
+
+.score {
+  font-size: 40px !important;
+}
+
+.popover-title {
+  font-weight: 700 !important;
+  padding: 5px !important;
+}
+
+.hide-overflow {
+  overflow: hidden !important;
+}
+
+@media only screen and (max-width: 991px) {
+  .hide-overflow {
+      overflow: auto !important;
+  }
+}
+
+.fullscreen-done .fh-report-table {
+  height: calc(100% - 30px) !important;
+}
+
+.portalusage .fh-short-title .fh-report-table thead th:first-child {
+  height: 25px;
+  max-height: 50px;
+}
+
+.help-title {
+  color: #00B0F0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.help-subtitle {
+  color: #0070C0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.qm-detail-outlier {
+  color: #ff0000 !important;
+  font-weight: bold;
+}
+
+.pur-user-active {
+  background-color: #66FF66;
+}
+
+.pur-user-inactive {
+  background-color: #e7ff00;
+}
+
+.pur-user-disabled {
+  background-color: #ff4d4d;
+}
+
+.info-modal.rehosp-card-readmission-scores .modal-dialog {
+  top: 10%;
+}
+
+@media(max-width: 1366px) {
+  .info-modal.rehosp-card-readmission-scores .modal-dialog {
+      top: 1%;
+  }
+
+  .info-modal .rehospReadmissionScores .gauge-collection.single-column {
+      max-width: calc(15vh);
+  }
+
+  .rehospReadmissionScores.fullscreen-done .gauge-collection.single-column {
+      max-width: calc(25vh);
+  }
+}
+
+.gauge-collection.single-column {
+  margin-bottom: 10px;
+}
+
+.gauge-collection-root {
+  display: block !important;
+}
+
+highcharts-data-labels {
+  top: 40px;
+}
+
+.gauge-datalabel, .gauge-value {
+  font-family: Arial Narrow, Arial, sans-serif;
+}
+
+.reading-label, .reading-block {
+    font-family: Arial Narrow, Arial, sans-serif !important;
+}
+
+.gaugecontainer {
+  cursor: pointer;
+}
+
+.tocCARDScores .gauge-collection-root {
+  max-width: 170px;
+}
+
+.single-column .highcharts-container {
+  margin: 0 auto;
+}
+
+.popover-content {
+  padding: 0px !important;
+}
+
+
+.scoredetail-modal .modal-body {
+  max-height: 90vh;
+}
+
+.rollup-column-header {
+  background-color: #d8d8d8;
+  border-bottom-color: #acacac;
+}
+
+.rollup-column-cell {
+  border-bottom-color: #acacac !important;
+  border-top-color: #acacac !important;
+  background-color: #d8d8d8 !important;
+}
+
+.gauge-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.informationmodal-scrollable-area {
+  width: 100%;
+  height: 185px;
+  overflow: auto;
+}
+
+.informationmodal-loadedfrom-spacing {
+  margin-top: 15px;
+}
+
+.auto-overflow{
+  overflow: auto !important;
+}
+
+.auto-overflow .page-wrapper {
+  position: static;
+}
+
+.introjs-helperNumberLayer {
+  display: none;
+}
+.hsOrg-change-btn-size {
+  font-size: 5pt;
+}
+.hsOrg-change-dropdown {
+  font-size: 10pt;
+  vertical-align: middle;
+}
+
+
+
+
+
+.overlay1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.loading1 {
+  width: 50px;
+  height: 57px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -28px 0 0 -25px;
+}
+.reports-header {
+  font-size: 20px;
+  font-weight: 600;
+}
+.reports-headerline {
+  margin-bottom: -25px;
+  margin-top: -15px;
+}
+  .reports-headerline .headerline {
+      border-top: 2px solid #000000;
+  }
+
+.report-category {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.report-category i {
+  font-size: 1.2em;
+}
+
+/* Login animation */
+.login-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.username-container,
+.password-container {
+  width: 100%;
+  top: 0;
+  padding: 10px;
+}
+
+.username-container {
+  left: 0;
+}
+
+.password-container {
+  left: 100%;
+  top: 0;
+}
+/* Login animation ends */
+
+.report-header-facility {
+  cursor: pointer;
+}
+
+.change-facility .multiselect-parent {
+  min-width: 250px !important;
+}
+
+.change-facility input{
+  margin-left : 0px !important;
+}
+.change-facility-icon {
+  font-size: 25px !important;
+  padding-left: 5px !important;
+  margin-top: -5px !important;
+}
+
+.change-facility-button{
+  min-width : 200px;
+}
+
+.dropdown-multiselect .dropdown-toggle .caret {
+  float: right;
+  margin-top: 8px;
+}
+
+.multiselect-wrapper .btn.header-organization-name {
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 4px;
+}
+
+/*Hsdashboard*/
+
+.card-flip .content-flip {
+  transition: 0.5s ease-out;
+  -webkit-transition: 0.5s ease-out;
+  -moz-transition: 0.5s ease-out;
+  -o-transition: 0.5s ease-out;
+  -ms-transition: 0.5s ease-out;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  /* content backface is visible so that static content still appears */
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  -moz-backface-visibility: visible;
+  -o-backface-visibility: visible;
+  -ms-backface-visibility: visible;
+}
+.card-flip.applyflip .content-flip {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+}
+.card-flip .content-flip {
+  position: relative;
+}
+.card-flip .content-flip .cardFront, .card-flip .content-flip .cardBack {
+  /* Backface visibility works great for all but IE. As such, we mark the backface visible in IE and manage visibility ourselves */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: visible;
+  /*position: absolute !important;*/
+  width: 100%;
+}
+
+.card-flip .content-flip .cardFrontWide, .card-flip .content-flip .cardBackWide {
+/* Backface visibility works great for all but IE. As such, we mark the backface visible in IE and manage visibility ourselves */
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden;
+-o-backface-visibility: hidden;
+-ms-backface-visibility: visible;
+width: 100%;
+}
+
+.card-flip .content-flip .cardFront, .card-flip .content-flip .cardFrontWide, .card-flip.applyflip .content-flip .cardFront, .card-flip.applyflip .content-flip .cardFrontWide {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+}
+
+.card-flip .content-flip .cardBack,.card-flip .content-flip .cardBackWide, .card-flip.applyflip .content-flip .cardBack, .card-flip.applyflip .content-flip .cardBackWide {
+  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+}
+
+.card-flip .content-flip .cardFront,.card-flip .content-flip .cardFrontWide, .card-flip.applyflip .content-flip .cardBack, .card-flip.applyflip .content-flip .cardBackWide {
+  /* IE Hack. Halfway through the card flip, set visibility. Keep other browsers visible throughout the card flip. */
+  animation: stayvisible 0.5s both;
+  -webkit-animation: stayvisible 0.5s both;
+  -moz-animation: stayvisible 0.5s both;
+  -o-animation: stayvisible 0.5s both;
+  -ms-animation: donothing 0.5s;
+  -ms-transition: visibility 0s linear 0.17s;
+  visibility: visible;
+}
+
+.card-flip.applyflip .content-flip .cardFront,.card-flip.applyflip .content-flip .cardFrontWide, .card-flip .content-flip .cardBack  .card-flip .content-flip .cardBackWide {
+  /* IE Hack. Halfway through the card flip, set visibility. Keep other browsers visible throughout the card flip. */
+  animation: stayvisible 0.5s both;
+  -webkit-animation: stayvisible 0.5s both;
+  -moz-animation: stayvisible 0.5s both;
+  -o-animation: stayvisible 0.5s both;
+  -ms-animation: donothing 0.5s;
+  -ms-transition: visibility 0s linear 0.17s;
+  visibility: hidden;
+}
+
+.pdpm-report {
+  font-size: 12px;
+  overflow-y: auto !important;
+  width: 98% !important;
+  padding-top: 2px !important;
+}
+
+.pdpm-section-width {
+  width: 90px;
+}
+
+.pdpm-mds-width {
+  width: 110px;
+}
+
+.pdpm-description-width {
+  width: 150px;
+}
+
+.pdpm-founddate-width {
+  width: 75px;
+}
+
+.pdpm-location-width {
+  width: 125px;
+}
+
+.pdpm-notes-width {
+  width: 220px;
+}
+
+
+.pdpm-header-table-color {
+  background-color: #0074bd;
+  color: white
+}
+
+.pdpm-data-table-color {
+  background-color: #B0B0B0;
+  font-weight: bold
+}
+
+
+.pdpm-td-spacing {
+  padding: 0px !important;
+}
+
+.pdpm-alt-color {
+  background-color: #F5F5F5
+}
+
+.pdpm-span-label {
+  width: 300px;
+  display: inline-block;
+  padding: 3px;
+}
+.pdpm-resident-label{
+  float: left;
+  padding-right: 3px;
+}
+
+
+
+@keyframes stayvisible {
+  from {
+      visibility: visible;
+  }
+
+  to {
+      visibility: visible;
+  }
+}
+
+@-webkit-keyframes stayvisible {
+  from {
+      visibility: visible;
+  }
+
+  to {
+      visibility: visible;
+  }
+}
+
+@-moz-keyframes stayvisible {
+  from {
+      visibility: visible;
+  }
+
+  to {
+      visibility: visible;
+  }
+}
+
+@-o-keyframes stayvisible {
+  from {
+      visibility: visible;
+  }
+
+  to {
+      visibility: visible;
+  }
+}
+
+@-ms-keyframes donothing {
+  0% {
+  }
+
+  100% {
+  }
+}
+
+
+.adlvsmds-top {
+  top: 90px !important;
+  height: calc(100% - 100px) !important;
+}
+.fullscreen-done .fh-report-table.adlvsmds-top {
+  top: 60px !important;
+}
+.btn-info.btn-adlvsmds-collapse {
+  background-color: #0074bd !important;
+  border-color: #0074bd !important;
+  width: 125px;
+  vertical-align: middle;
+}
+.btn-info.btn-adlvsmds-expand {
+  background-color: #f46f34 !important;
+  border-color: #f46f34 !important;
+  width: 125px;
+  vertical-align: middle;
+}
+
+.title-padding {
+padding-left: 1px !important;
+padding-right: 0px !important;
+}
+
+  /** Kind of workaround to let child div consume full height as td */
+.rtmsgrid td.templated-cell {
+  height: 1px;
+}
+.rtmsgrid td.templated-cell {
+  padding: 0px !important;
+}
+  .rtmsgrid td.templated-cell div.cell-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+  }
+
+  .rtmsgrid td.templated-cell div.template-container {
+      width: 100%;
+      height: 100%;
+  }
+
+  .rtmsgrid td.templated-cell div.template-container .table-cell-padding {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+  }
+
+
+
+.close-btn-right {
+  height: 40px;
+  width: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #f7f7f7;
+  float: right;
+  cursor: pointer;
+}
+.close-btn-right .fa-window-close {
+  font-size: 36px;
+}
+.close-btn-right:hover .close-btn-right:focus {
+  color: #fff;
+  background-color: #f7f7f7;
+}
+
+.row-disabled {
+  background-color: lightgrey;
+}

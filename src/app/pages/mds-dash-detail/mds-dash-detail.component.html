@@ -1,0 +1,45 @@
+<div id="mdDashDetail" class="financialdetail_scroll financialdetail_tablemds">
+    <div class="fh-report-table table-container"
+      style="overflow-y:auto; width:98% !important; padding-top:2px !important; border:none !important">
+      <div class="multi-report-item" *ngFor="let table of data.seriesData">
+        <strong class="tName">{{table.Heading}}</strong>
+        <div *ngIf="table.MdsDashTableData.lstMdsDashTableResult.length == 0">
+          <div class="noDataGrid noprint" id="noDataDiv">
+            <div class="text-left">No QRP Issues found for this category.
+            </div>
+          </div>
+        </div>
+        <div class="table-container" *ngIf="table.MdsDashTableData.lstMdsDashTableResult.length > 0">
+          <table
+            class="table table-bordered mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ignore-table-limits">
+            <thead>
+              <tr>
+                <th class="qrp-tblheader" *ngFor="let column of table.MdsDashTableData.lstMdsDashTableColumn">
+                  <span class="qrp-tbl-detail" [ngClass]="!column.IsHorizontalText ? 'vertical' : ''"
+                    title="{{column.Tooltip}}">{{column.Label}}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr grid-item *ngFor="let result of table.MdsDashTableData.lstMdsDashTableResult">
+                <td [ngClass]="getCSSAlignment(table, i)"
+                  *ngFor="let item of result.lstMdsDashTableResult | slice:0:result.lstMdsDashTableResult.length-3; let i=index">
+                  <span
+                    *ngIf="table.MdsDashTableData.lstMdsDashTableColumn[i].Label === 'Resident' || table.MdsDashTableData.lstMdsDashTableColumn[i].Label === 'Resident Name'">
+                    <rtms-resident-card-score-indicator
+                      [organizationId]="result.lstMdsDashTableResult[result.lstMdsDashTableResult.length-3]"
+                      [reportId]="data.reportId" [reportName]="table.Heading"
+                      [riskLevel]="result.lstMdsDashTableResult[result.lstMdsDashTableResult.length-2]"
+                      [resMrn]="result.lstMdsDashTableResult[result.lstMdsDashTableResult.length-1]">
+                    </rtms-resident-card-score-indicator>
+                  </span>
+                  <span *ngIf="item==='-'"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                  <span *ngIf="item!=='-'" [innerHTML]="item"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

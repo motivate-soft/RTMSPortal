@@ -1,0 +1,262 @@
+<div *ngIf="gridOptions && rowData && rowData.length>0">
+  <div class="rtmsgrid panel-body full-height">
+    <div class="rtmsgrid pagination" *ngIf="gridOptions.pagination && ItemsByPage.length > 1">
+      <div class="cursor child" (click)="firstPage()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div>
+      <div class="cursor child" (click)="setPage(currentPage - 1)"><i class="fa fa-angle-left" aria-hidden="true"></i>
+      </div>
+      <div class="cursor current">{{currentPage + 1}} of {{ItemsByPage.length}} Pages</div>
+      <div class="cursor child" (click)="setPage(currentPage + 1)"><i class="fa fa-angle-right" aria-hidden="true"></i>
+      </div>
+      <div class="cursor child" (click)="lastPage()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+    </div>
+    <div >
+        <div *ngIf="showExpandCollapseForAdlVsMds" class="btn-expand-all">
+            <button title="{{isAllExpanded ?'Collapse All' : 'Expand All'}}"
+                    class="btn btn-info" [ngClass]="isAllExpanded ? 'btn-adlvsmds-collapse' :'btn-adlvsmds-expand' " type="button" (click)="showAdlVsMdsRollupDetail()">
+                <i [ngClass]="isAllExpanded ? 'fal fa-minus-square cursor' :'fal fa-plus-square cursor' " style="vertical-align: middle;"></i>
+                {{isAllExpanded ? 'Collapse All' :'Expand All'}}
+            </button>
+        </div>
+    </div>
+    <div class="text-center detail_search detail_search_topmargin pull-right prn"
+      [ngClass]="(gridOptions && gridOptions.ChartName)?'col-md-3 col-sm-3 col-xs-3':'col-md-4 col-sm-4 col-xs-5'">
+      <input class="pull-right" [hidden]="!showSearch" placeholder=" Search" [(ngModel)]="gridOptions.searchText" #search>
+    </div>
+    <div [hidden]="gridOptions.reportKey === null" class="report-key">{{gridOptions.reportKey}}</div>
+    <div class="rtms-grid-container full-height">
+      <div id="{{gridOptions.templateid}}" class="financialdetail_scroll" [ngClass]="gridOptions.tableClass">
+        <div class="fh-report-table table-container"
+          [ngClass]="{'mtm': gridOptions.pagination && ItemsByPage.length > 1,
+            'two-line-header': headerLevel === 2, 'three-line-header': headerLevel === 3}">
+          <div class="fh-report-table-title" *ngIf="!disableFixHeader"> <!-- ngIf is HACK to fix issue in IE for ADL vs MDS reports -->
+            <table class="table ignore-table-limits table-bordered table-hover reports_background">
+              <thead>
+                <tr>
+                  <th *ngFor="let column of gridOptions.columnDefs;trackBy:trackByGridColumnId" class="{{column.cellClass}}"
+                    [ngClass]="{'cursor':gridOptions.sortable && !column.children && !column.suppressSort}"
+                    [attr.rowspan]="column.children ? 1 : 3" [attr.colspan]="getColspan(column)" [hidden]="column.hide"
+                    (click)="onSortChanged(column)"
+                    [attr.title]="gridOptions.sortable && !column.children && !column.suppressSort? 'Click to sort':''">
+
+                    <div class="table-label th-two-line">
+                      <span [innerHTML]="column.headerName"></span>
+                      <i *ngIf="gridOptions.sortable && !column.children && !column.suppressSort"
+                        [hidden]="!(gridOptions.sortType === column.field)"
+                        [ngClass]="gridOptions.setSortIcon(gridOptions.sortReverse)"></i>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <ng-template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="trackByGridColumnId">
+                    <th *ngIf="column.child" class="{{column.child.cellClass}}"
+                      [ngClass]="{'cursor':gridOptions.sortable && !column.child.children && !column.child.suppressSort}"
+                      [attr.title]="gridOptions.sortable && !column.child.children && !column.child.suppressSort? 'Click to sort':''"
+                      (click)="onSortChanged(column.child)" [attr.rowspan]="column.child.children ? 1 : 2"
+                      [attr.colspan]="column.child.children ? column.child.children.length : 1">
+
+                      <span [innerHTML]="column.child.headerName"></span>
+                      <i *ngIf="gridOptions.sortable && !column.child.children && !column.child.suppressSort"
+                        [hidden]="gridOptions.sortType !== column.child.field"
+                        [ngClass]="gridOptions.setSortIcon(gridOptions.sortReverse)"></i>
+                    </th>
+                  </ng-template>
+                </tr>
+                <tr>
+                  <ng-template ngFor let-column [ngForOf]="subChildColumns" [ngForTrackBy]="trackByGridColumnId">
+                    <th *ngIf="column.subChild" class="{{column.subChild.cellClass}}"
+                      [ngClass]="{'cursor':gridOptions.sortable && !column.subChild.suppressSort}"
+                      [attr.title]="gridOptions.sortable && !column.subChild.suppressSort? 'Click to sort':''"
+                      (click)="onSortChanged(column.subChild)">
+
+                      <span [innerHTML]="column.subChild.headerName"></span>
+                      <i *ngIf="gridOptions.sortable && !column.subChild.suppressSort"
+                        [hidden]="gridOptions.sortType !== column.subChild.field"
+                        [ngClass]="gridOptions.setSortIcon(gridOptions.sortReverse)"></i>
+                    </th>
+                  </ng-template>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="fh-report-table-content">
+            <table class="table table-bordered reports_background tblContent">
+              <thead>
+                <tr>
+                  <th *ngFor="let column of gridOptions.columnDefs;trackBy:trackByGridColumnId" class="{{column.cellClass}}"
+                    [ngClass]="{'cursor':gridOptions.sortable && !column.children && !column.suppressSort}"
+                    [attr.rowspan]="column.children ? 1 : 3" [attr.colspan]="getColspan(column)" [hidden]="column.hide"
+                    [ngStyle]="{ 'min-width' : column.width+'px', 'max-width' : column.width+'px' }"
+                    (click)="onSortChanged(column)"
+                    [attr.title]="gridOptions.sortable && !column.children && !column.suppressSort? 'Click to sort':''">
+
+                    <div class="table-label th-two-line">
+                      <span [innerHTML]="column.headerName"></span>
+                      <i *ngIf="gridOptions.sortable && !column.children && !column.suppressSort"
+                        [hidden]="!(gridOptions.sortType === column.field)"
+                        [ngClass]="gridOptions.setSortIcon(gridOptions.sortReverse)"></i>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <ng-template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="trackByGridColumnId">
+                    <th *ngIf="column.child" class="{{column.child.cellClass}}"
+                      [ngClass]="{'cursor':gridOptions.sortable && !column.child.children && !column.child.suppressSort}"
+                      [attr.title]="gridOptions.sortable && !column.child.children && !column.child.suppressSort? 'Click to sort':''"
+                      (click)="onSortChanged(column.child)" [attr.rowspan]="column.child.children ? 1 : 2"
+                      [attr.colspan]="column.child.children ? column.child.children.length : 1">
+
+                      <span [innerHTML]="column.child.headerName"></span>
+                      <i *ngIf="gridOptions.sortable && !column.child.children && !column.child.suppressSort"
+                        [hidden]="gridOptions.sortType !== column.child.field"
+                        [ngClass]="gridOptions.setSortIcon(gridOptions.sortReverse)"></i>
+                    </th>
+                  </ng-template>
+                </tr>
+                <tr>
+                  <ng-template ngFor let-column [ngForOf]="subChildColumns" [ngForTrackBy]="trackByGridColumnId">
+                    <th *ngIf="column.subChild" class="{{column.subChild.cellClass}}"
+                      [ngClass]="{'cursor':gridOptions.sortable && !column.subChild.suppressSort}"
+                      [attr.title]="gridOptions.sortable && !column.subChild.suppressSort? 'Click to sort':''"
+                      (click)="onSortChanged(column.subChild)">
+
+                      <span [innerHTML]="column.subChild.headerName"></span>
+                      <i *ngIf="gridOptions.sortable && !column.subChild.suppressSort"
+                        [hidden]="gridOptions.sortType !== column.subChild.field"
+                        [ngClass]="gridOptions.setSortIcon(gridOptions.sortReverse)"></i>
+                    </th>
+                  </ng-template>
+                </tr>
+              </thead>
+              <tbody #tableBody id="tableBody">
+                <ng-template ngFor let-datam
+                  [ngForOf]="gridOptions.pagination?ItemsByPage[currentPage]:data|searchFilter: gridOptions.searchQuery"
+                  let-$index="index" [ngForTrackBy]="trackByRowIdOrIndex">
+                  <tr exportData="true" [hidden]="!(data.length > 0)"
+                    [ngClass]="{'cursor':gridOptions.rowClickEnabled, 'row_selected':$index == gridOptions.selectedRow}"
+                    class="{{datam.RowClass}}"
+                    (click)="gridOptions.rowClickEnabled && onRowClick($event,datam,$index)"
+                    [attr.title]="(gridOptions.RowTitleEnabled && datam.RowTitle) || ''"
+                    [attr.data-rowid]="getRowId($index)">
+                    <td *ngFor="let column of columnDefs;trackBy:trackByGridColumnId" [hidden]="column.hide"
+                      [ngClass]="{'sorted':(gridOptions.sortType == column.field) && $index != gridOptions.selectedRow, 'templated-cell': (column.columnTemplate=='app/views/templates/illogicaladlscore.html' || column.columnTemplate=='app/views/templates/scoreVariance.html')}">
+                      <div class="{{column.cellClass}}" [ngClass]="{'no-wrap': column.suppressWordWrap, 'cell-container':true}"
+                        [attr.title]="(gridOptions.RowTitleEnabled && datam.RowTitle) || ''">
+                        <span [ngClass]="{'detail-button': column.columnTemplate}"
+                          *ngIf="column.hasChildren && gridOptions.allowRowGrouping && datam.HasChildRows">
+                          <i [ngClass]="{'fa-minus-square':datam.ShowDetail,'fa-plus-square':!datam.ShowDetail}"
+                            class="deatilButton cursor fal"
+                            (click)="datam.ShowDetail = !datam.ShowDetail;userWasFiltered = true;toggleExpandCollapseForAdlVsMds();"></i>
+                        </span>
+                        <div *ngIf="column.columnTemplate=='app/views/templates/alertResidentScore.html'">
+                          <ng-container
+                            *ngTemplateOutlet="itemTemplateForaResidentScoreIndicator;context:{rowData:datam}">
+                          </ng-container>
+                        </div>
+                        <div *ngIf="column.columnTemplate=='app/views/templates/usageIndicator.html'">
+                          <ng-container *ngTemplateOutlet="itemTemplateForUsageIndicator;context:{rowData:datam}">
+                          </ng-container>
+                        </div>
+                        <div *ngIf="column.columnTemplate=='app/views/templates/scoreVariance.html'" class="template-container">
+                          <ng-container *ngTemplateOutlet="itemTemplateForScoreVariance;context:{rowData:datam}">
+                          </ng-container>
+                        </div>
+                        <div *ngIf="column.columnTemplate=='app/views/templates/illogicaladlscore.html'" class="template-container">
+                          <rtms-illogical-adl-score [data]="datam" [field]="column.field" [isShowTooltip]="isShowTooltip"></rtms-illogical-adl-score>
+                        </div>
+                        <div *ngIf="column.columnTemplate=='app/views/templates/snoozeDate.html'" class="template-container">
+                          <ng-container *ngTemplateOutlet="itemTemplateForSnoozeDate;context:{rowData:datam, columnData:column}">
+                          </ng-container>
+                        </div>
+                        <span class="cursor"
+                          [ngClass]="{'pls': column.hasChildren && gridOptions.allowRowGrouping && datam.HasChildRows}"
+                          *ngIf="gridOptions.allowDrillDown && column.allowCellClick && !column.columnTemplate">
+                          <a (click)="cellClick(column, datam)" class="reports_plussign_resident">
+                            <span
+                              [innerHTML]="column.valueGetter? checkForNull(column.valueGetter(datam)) : checkForNull(datam[column.field])"></span>
+                          </a>
+                        </span>
+                        <span *ngIf="!(gridOptions.allowDrillDown && column.allowCellClick) && !column.columnTemplate"
+                          [ngClass]="{'pls': column.hasChildren && gridOptions.allowRowGrouping && datam.HasChildRows}">
+                          <span
+                          [innerHTML]="column.valueGetter? checkForNull(column.valueGetter(datam)) : checkForNull(datam[column.field])"></span>
+                        </span>
+                      </div>
+                    </td>
+
+                  </tr>
+                  <ng-template [ngIf]="datam.ShowDetail">
+                    <tr [ngStyle]="{'background-color': showExpandCollapseForAdlVsMds ? '#d3d3d3' : '#FFFFFF' }" class="child-row" [ngClass]="(!datam.ShowDetail) ? 'noprint' : ''" exportChildRow="true"
+                      *ngFor="let childRow of datam.ChildRows;trackBy:trackByIndex">
+
+                      <td *ngIf="childRow['isFullWidth']" [attr.colspan]="columns.length">
+                        <div [ngClass]="columnDefs[0].childClass">
+                          <div>
+                            <span [innerHTML]="checkForNull(childRow[columnDefs[0].field])"></span>
+                          </div>
+                        </div>
+                      </td>
+                      <ng-template ngFor let-column [ngForOf]="columnDefs" [ngForTrackBy]="trackByGridColumnId">
+                        <td *ngIf="!childRow['isFullWidth']" [ngClass]="{'sorted': gridOptions.sortType == column.field}">
+                          <div [ngClass]="column.childClass">
+                            <div *ngIf="!column.parentOnly">
+                              <span [innerHTML]="checkForNull(childRow[column.field])"></span>
+                            </div>
+                          </div>
+                        </td>
+                      </ng-template>
+                    </tr>
+                  </ng-template>
+                </ng-template>
+                <tr *ngIf="data.length == 0">
+                  <td [attr.colspan]="columns.length">
+                    <ng-container *ngTemplateOutlet="itemTemplateForNoDataFound;context:{}">
+                    </ng-container>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot *ngIf="!hideFooter">
+                <tr [hidden]="!(data.length > 0)" id="tableFooter">
+                  <td [attr.colspan]="columnDefs.length">
+                    <div id="summaryfooter" *ngIf="this.showPDPMSummaryFooterMsg">
+                     <strong> * Data is from Accepted 5 Day Assessments </strong><br /><br />
+                    </div>
+                    <rtms-reports-footer></rtms-reports-footer>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="data.length == 0" class="rtmsgrid panel-body full-height">
+  <ng-container *ngTemplateOutlet="itemTemplateForNoDataFound;context:{}">
+  </ng-container>
+</div>
+
+<ng-template let-datam="rowData" #itemTemplateForaResidentScoreIndicator>
+  <rtms-resident-card-score-indicator [organizationId]="datam.OrganizationId" [reportId]="reportId"
+    [reportName]="gridOptions.ChartName" [riskLevel]="datam.RiskLevel" [resMrn]="datam.ResMRN">
+  </rtms-resident-card-score-indicator>
+  <p class="hide-overflow">{{datam.ResNameL}}, {{datam.ResNameF}} ({{datam.ResMRN}})</p>
+</ng-template>
+
+<ng-template let-datam="rowData" #itemTemplateForUsageIndicator>
+  <span class="badge" [ngStyle]="{'background-color': datam.ColorCode}">{{datam.SessionViews}}</span>
+</ng-template>
+
+<ng-template let-datam="rowData" #itemTemplateForScoreVariance>
+   <div class="table-cell-padding text-center rollup-column-cell">{{datam.ScoreVariance}}</div>
+</ng-template>
+
+<ng-template let-datam="rowData" let-column="columnData" #itemTemplateForSnoozeDate>
+  <i class="snooze fa" [ngClass]="{'fa-alarm-snooze': !datam.IsSnoozed, 'fa-alarm-clock': datam.IsSnoozed}" 
+    (click)="cellClick(column, datam)" title="{{!datam.IsSnoozed ? 'Snooze' : 'Activate'}}"></i>
+</ng-template>
+
+<ng-template let-text="text" let-alignLeft="alignLeft" #itemTemplateForNoDataFound>
+  <rtms-no-data-found [noDataMessage]="noDataMessage"></rtms-no-data-found>
+</ng-template>

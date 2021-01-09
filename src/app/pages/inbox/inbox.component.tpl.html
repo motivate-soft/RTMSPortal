@@ -1,0 +1,75 @@
+<div id="wrapper">
+  <!-- BEGIN PAGE WRAPPER -->
+  <div id="page-wrapper" class="page-wrapper">
+    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+        <div class="page-header pull-left">
+            <div class="page-title">
+               Inbox
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="page-content alt-background-color">
+        <div class="row no-padding">
+            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 pull-right no-padding">
+                    <input placeholder="Search" class="form-control" [(ngModel)]="_searchText">
+                </div>
+            </div>
+        </div>
+
+        <div *ngFor="let group of this._groups" >
+            <mat-expansion-panel expanded open (closed)="false">
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="inbox-accordian">
+                    {{group.Title}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div style="height:20px"></div>
+
+                <table width="100%" class="table ignore-table-limits table-bordered table-hover reports_background inbox-item" border="1">
+                    <thead>
+                        <tr>
+                            <th width="2%"></th>
+                            <th width="75%">
+                                Subject
+                            </th>
+                            <th width="23%">
+                                Received
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of this._gridData|inboxGroupFilter:group.Id|inboxFilter:this._searchText"
+                            (click)="getReport(item)" style="width:100%;border-bottom:solid;border-bottom-color:gainsboro;border-width:thin" class="cursor">
+                            <td>
+                                <i class="fa fa-paperclip fa-1x" aria-hidden="true" ></i>
+                            </td>
+                            <td>
+                                <div >{{item.DisplayName}}</div>
+                            </td>
+                            <td nowrap >
+                                {{item.ExecutionDateTime | date:"EEE M/dd/yyyy h:mm a"}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </mat-expansion-panel>
+            <div style="height:20px"></div>
+        </div>
+
+        <div class="text-center" id="noInboxItems" *ngIf="this._groups.length <= 0">
+            <div class="inbox-noreport-text">Currently no reports to view.  Have a nice day!!</div>
+            <br />
+            <br />
+            <br />
+            <i class="fa fa-inbox inbox-noreport-icon" aria-hidden="true"></i>
+        </div>
+    </div>
+        <rtms-feedback></rtms-feedback>
+  </div>
+</div>

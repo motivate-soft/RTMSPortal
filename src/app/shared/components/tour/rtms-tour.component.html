@@ -1,0 +1,13 @@
+<div>
+    <ng-template #skipToursPopup>
+        <div class="modal-body">
+            <div class="col-md-12 text-primary">
+                <h4>Do you want to skip all tours or current tour only?</h4>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal" (click)="skipCurrentTour()">Skip Current</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" (click)="skipAllTours()">Skip All</button>
+        </div>
+    </ng-template>
+</div>

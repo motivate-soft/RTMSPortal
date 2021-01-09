@@ -1,0 +1,50 @@
+<div [@dialog] class="dialog">
+  <div class="modal-header">
+    <div class="modal-header-primary">
+      <span class="modal-title">{{Data.chartName}}</span>
+      <span class="close-btn-right" (click)="close()">
+        <i class="fa fa-window-close" title="Close"></i>
+      </span>  
+    </div>  
+  </div>
+  <div class="modal-body information-popup">
+    <div class="row">
+      <div [ngClass]="Data.embedChart?'col-md-6':'col-md-12'">
+        <div class="col-md-12">
+          <span class="desc">
+            <span class="title">Description:</span>
+            <p [innerHTML]="Data.informationData.Explanation"></p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="Data.embedChart">
+        <div class="info-chart" style="position: relative"></div>
+      </div>
+    </div>
+  </div>
+  <div class="information-popup-tabs tab-content" style="overflow-y: scroll;">
+    <tabset>
+      <tab *ngIf="Data.informationData.Sources.length > 0">
+        <ng-template tabHeading>
+          <i class="fa fa-book" aria-hidden="true"></i> Documented
+        </ng-template>
+        <div class="col-md-12">
+          <span style="font-weight: bold;">Documented:</span>
+
+          <div *ngFor="let a of Data.informationData.Sources" [innerHTML]="a.DocumentedUIString"></div>
+
+          <div style="margin-top: 1em;">
+            <span style="font-weight: bold;">Loaded From:</span>
+            <div *ngFor="let a of Data.informationData.Sources" [innerHTML]="a.LoadedFromUIString"></div>
+          </div>
+        </div>
+      </tab>
+      <tab *ngFor="let citationSection of Data.reportCitationSections; index as i">
+        <ng-template tabHeading>
+          <i class="fa {{citationSection.CitationSectionIcon}}" aria-hidden="true"></i> {{citationSection.CitationSectionName}}
+        </ng-template>
+        <p [innerHTML]="citationSection.Description"></p>
+      </tab>
+    </tabset>
+  </div>
+</div>

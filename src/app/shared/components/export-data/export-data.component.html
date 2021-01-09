@@ -1,0 +1,43 @@
+
+<div
+  [ngClass]="isDetailed?(chartName && chartName!=''?'col-md-2 col-sm-2 col-xs-2':'col-md-2 col-sm-2 col-xs-2'):'col-md-12 no-padding'"
+  class="padding-x-sm">
+  <div class="export-button"  id="Hamburger_{{reportId}}">
+    <button class="btn green btn-outline dropdown-toggle pull-right" data-toggle="dropdown" aria-expanded="false">
+      <i [ngClass]="{'export-enabled': ! exportDisabled}" class="fa fa-bars" style="color:black"></i>
+    </button>
+    <ul class="dropdown-menu pull-right">
+      <li *ngIf="! exportDisabled">
+        <a class="exportDropDownMenu export-pdf" href="javascript:;" (click)="export.emit('pdf');">
+          <i class="menu-icon">a</i>
+          <span class="text">Export to PDF</span>
+        </a>
+      </li>
+      <li *ngIf="! exportDisabled">
+        <a class="exportDropDownMenu export-excel" href="javascript:;" (click)="export.emit('excel');">
+          <i class="menu-icon">e</i>
+          <span class="text">Export to Excel</span>
+        </a>
+      </li>
+      <li *ngIf="! exportDisabled">
+        <a class="exportDropDownMenu" href="javascript:;" (click)="export.emit('word');">
+          <i class="menu-icon">h</i>
+          <span class="text">Export to Word</span>
+        </a>
+      </li>
+      <li class="hide-on-fullscreen">
+        <a class="exportDropDownMenu export-fullscreen" href="javascript:;"
+          (click)="showFullScreenClick($event);">
+          <i class="menu-icon">r</i>
+          <span class="text">Show Full Screen</span>
+        </a>
+      </li>
+      <li *ngIf="exportCardPdfEnabled">
+          <a class="exportDropDownMenu export-excel" href="javascript:;" (click)="export.emit('detailPDF');">
+            <i class="menu-icon">d</i>
+            <span class="text">Export Detail PDF</span>
+          </a>
+        </li>
+    </ul>
+  </div>
+</div>

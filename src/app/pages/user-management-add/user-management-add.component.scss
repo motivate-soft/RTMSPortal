@@ -1,0 +1,53 @@
+.page-content .fixed-height-report {
+  height: calc(100vh - 90px);
+}
+
+.active-text {
+  color: green;
+}
+
+.inactive-text {
+  color: red;
+}
+
+.confirm-modal .modal-body {
+  min-height: 70px;
+}
+
+.toggle-on, .toggle-off {
+  padding-top: 6px;
+}
+
+.btn-info.toggle-on:hover, .toggle.btn-info:hover {
+  background-color: #0074bd;
+  border-color: #0074bd;
+}
+
+.toggle.btn.btn-xs {
+  height: 29px !important;
+  width: 50px !important;
+}
+.input-label {
+  width: 25%;
+  vertical-align: text-top;
+}
+
+.input-field {
+  width: 65%
+}
+
+.validation-error {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+tags-input.ng-invalid .tags {
+  box-shadow: 0px 0px 0px 0 #d3d3d3 inset;
+  border: 1px solid #ccc;
+}
+.dashboard-availability-warning
+{
+    padding: 6px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}

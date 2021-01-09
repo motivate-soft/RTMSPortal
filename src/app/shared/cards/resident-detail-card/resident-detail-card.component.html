@@ -1,0 +1,20 @@
+<div class="resident-detail-card" *ngFor="let resident of seriesData;">
+  <div class="row" >
+    <div class="col-md-3"><strong>DOB: </strong> {{resident.ResDOBFormatted}} </div>
+    <div class="col-md-2"><strong>Room #: </strong> {{resident.RoomBed}}</div>
+    <div class="col-md-3"><strong>Payer: </strong> {{resident.PayerName}}</div>
+    <div class="col-md-4"><strong>Admission Date: </strong> {{resident.AdmissionDateFormatted}}</div>
+
+  </div>
+  <div class="row resident-detail-row-padding">
+    <div class="col-md-3" *ngIf="!resident.HasAnticoagulants"><strong>Anticoagulants:</strong> No</div>
+    <div class="col-md-3" *ngIf="resident.HasAnticoagulants"><strong>Anticoagulants:</strong><font color="red"> Yes</font></div>
+    <div class="col-md-5"><strong>Code Status: </strong> {{resident.CodeStatus}}</div>
+    <div class="col-md-4"><strong>Primary Physician: </strong> {{resident.PhysicianName}}</div>
+  </div>
+  <div class="row resident-detail-row-padding">
+    <div class="col-md-3" *ngIf="!resident.HasAntibiotics"><strong>Antibiotics:</strong> No</div>
+    <div class="col-md-3" *ngIf="resident.HasAntibiotics"><strong>Antibiotics:</strong><font color="red"> Yes</font></div>
+    <div class="col-md-9"><strong>Allergies: </strong><font color="red">{{resident.Allergies}}</font></div>
+  </div>
+</div>

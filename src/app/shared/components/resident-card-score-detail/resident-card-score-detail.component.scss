@@ -1,0 +1,63 @@
+.modal-header .close {
+  margin-top: 8px;
+}
+
+.tally {
+  padding: 5px 0px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.gray-background {
+  background-color: #dfdfdf;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.modal-body {
+  max-height: 650px;
+  padding: 3px  !important;
+}
+
+.tab-main-content{
+  height: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.keyword-item {
+  margin-top: 5px;
+  margin-left: 2px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eeeeee;
+
+  .meta {
+    font-size: 0.9em;
+    color: gray;
+    padding-bottom: 2px;
+  }
+
+  .keyword {
+    font-size: 1em;
+    color: #F05E23;
+    font-weight: bold;
+  }
+
+  .author, .date {
+    color: #000000;
+  }
+
+  .phrase {
+    margin-left: 5px;
+  }
+}
+
+.interventions {
+  hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%
+  }
+}

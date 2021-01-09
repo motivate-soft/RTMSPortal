@@ -1,0 +1,309 @@
+<div>
+    <div class="panel panel-orange" data-step="2" data-intro="This is a tooltip!">
+        <div class="panel-heading filter-header">Filter</div>
+        <div class="panel-body custom mtn">
+            <div class="clearfix">
+                <div
+                    *ngIf="useSingleDate && !isHealthSystem && !isUtilizationScore && !isEnterpriseProactDashboard && !isPortalUsage && !isResidentDashboard">
+                    <div class="form-group ">
+                        <label class="example-input-wrapper">As Of Date: </label>
+                                            <p class="input-group">
+                                            <p-calendar
+                                            [(ngModel)]="filterDate"
+                                            [showTime]="enableTime"
+                                            [showIcon]="true"
+                                            [monthNavigator]="true"
+                                            [yearNavigator]="true"
+                                            yearRange="2000:2030"
+                                            showButtonBar="true"
+                                            [style]="{'width':'100%'}"
+                                            [inputStyle]="{'width':'90%'}"
+                                            hourFormat="24"
+                                            dateFormat={{dateFormat}}
+                                            [inputStyleClass]="'form-control'"
+                                            placeholder="Date Time:"
+                                            selectOtherMonths="true"
+                                            >
+                                           </p-calendar>
+                                        </p>
+                    </div>
+                </div>
+                <div *ngIf="!useSingleDate">
+                    <div class="form-group">
+                        <div>
+                            <label>Start Date:</label>
+                            <p class="input-group">
+                                    <p-calendar
+                                    [(ngModel)]="startDate"
+                                    [showTime]="enableTime"
+                                    [showIcon]="true"
+                                    [monthNavigator]="true"
+                                    [yearNavigator]="true"
+                                    yearRange="2000:2030"
+                                    showButtonBar="true"
+                                    [style]="{'width':'100%'}"
+                                    [inputStyle]="{'width':'90%'}"
+                                    hourFormat="24"
+                                    dateFormat={{dateFormat}}
+                                    [inputStyleClass]="'form-control'"
+                                    placeholder="Date Time:"
+                                    selectOtherMonths="true"
+                                    >
+                                   </p-calendar>
+                            </p>
+                        </div>
+                        <label>End Date:</label>
+                        <p class="input-group">
+                                <p-calendar
+                                [(ngModel)]="endDate"
+                                [showTime]="enableTime"
+                                [showIcon]="true"
+                                [monthNavigator]="true"
+                                [yearNavigator]="true"
+                                yearRange="2000:2030"
+                                showButtonBar="true"
+                                [style]="{'width':'100%'}"
+                                [inputStyle]="{'width':'90%'}"
+                                hourFormat="24"
+                                dateFormat={{dateFormat}}
+                                [inputStyleClass]="'form-control'"
+                                placeholder="Date Time:"
+                                selectOtherMonths="true"
+                                >
+                               </p-calendar>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="isPortalUsage || isInfectionSurveillance">
+                    <label>Facilities:</label>
+                    <div class="multiselect-wrapper">
+                        <ng-select [items]="facility" groupBy="OrganizationType" [multiple]="true" [searchable]="true"
+                            [selectableGroupAsModel]="false" placeholder="Select" [selectableGroup]="true"
+                            [closeOnSelect]="false" name="facilities" [(ngModel)]="selMultiFacs"
+                            bindLabel="OrganizationName" bindvalue="OrganizationId" >
+
+                            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> 
+                                <span>Check all</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                <span>{{item.OrganizationName}}</span>
+                            </ng-template>
+
+                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+
+                                <div class="ng-value" *ngFor="let item of (items ? items.slice(0,1): [])">
+                                    <span class="ng-value-label " *ngIf="items.length == 1">{{item.OrganizationName}}
+                                    </span>
+                                </div>
+                                <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length }} checked</span>
+                                </div>
+                            </ng-template>
+                        </ng-select>
+
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="isPortalUsage">
+                    <label>Status:</label>
+                    <ng-select [items]="userStatus" [multiple]="true" [selectableGroup]="true"
+                        [selectableGroupAsModel]="false" placeholder="Select" [closeOnSelect]="false" name="status"
+                        [(ngModel)]="selUserStatus">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                            <span>{{item.label}}</span>
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+                <div class="form-group" *ngIf="!isHealthSystem && !isPortalUsage && !isUtilizationScore
+                    && !isEnterpriseProactDashboard && !isEnterpriseFinancialDashboard && !isEnterpriseClinicalDashboard
+                    && !isEnterprisePDPMDashboard && !isInfectionSurveillance">
+                    <label>Facility:</label>
+                    <ng-select name="fac" [items]="facility" [clearable]="false" bindLabel="OrganizationName" [closeOnSelect]="true"
+                        placeholder="Select" (change)="changeFacility();" [(ngModel)]="selectedOrganization">
+                    </ng-select>
+
+
+                </div>
+                <div class="form-group" *ngIf="isUtilizationScore">
+                    <label>Organization:</label>
+                    <ng-select [items]="facility" [(ngModel)]="selectedOrganization" bindLabel="OrganizationName"
+                    [clearable]="false" name="org" [closeOnSelect]="true" placeholder="Select"  [searchable]="true" >
+                        <ng-template ng-label-tmp let-item="item">
+                            {{item.OrganizationName}} - {{item.OrganizationTypeName}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item">
+                            {{item.OrganizationName}} - {{item.OrganizationTypeName}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+                <div class="form-group" *ngIf="!isHealthSystem && !isUtilizationScore && !isEnterpriseProactDashboard && !isPortalUsage && !isInfectionSurveillance">
+                    <label>Unit:</label>
+                    <div class="multiselect-wrapper">
+
+                        <ng-select [items]="units" [multiple]="true" groupBy="OrganizationName" [selectableGroup]="true" [searchable]="false"
+                            [closeOnSelect]="false" [selectableGroupAsModel]="false" placeholder="Select"
+                            [(ngModel)]="selUnit">
+
+                            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                <span *ngIf="isMultiFacilityUnit"> {{item.OrganizationName}}</span>
+                                <span *ngIf="!isMultiFacilityUnit"> Check all</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                <span>{{item.UnitName}}</span>
+                            </ng-template>
+
+                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+
+                                <div class="ng-value" *ngFor="let item of (items ? items.slice(0,1): [])">
+                                    <span class="ng-value-label " *ngIf="items.length == 1">{{item.UnitName}} </span>
+                                </div>
+                                <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length }} checked</span>
+                                </div>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="!isUtilizationScore && !isPortalUsage && !isInfectionSurveillance">
+                    <label>Payer: </label>
+
+                    <ng-select [items]="payers" groupBy="FacIdAsStringForFiltering" [multiple]="true" [selectableGroupAsModel]="false" [searchable]="false"
+                        placeholder="Select" [closeOnSelect]="false" [selectableGroup]="true" name="payer" [(ngModel)]="selPayer">
+
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                            <span>Check all</span>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                            <span>{{item.PayerName}}</span>
+                        </ng-template>
+
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+
+                            <div class="ng-value" *ngFor="let item of (items ? items.slice(0,1): [])">
+                                <span class="ng-value-label " *ngIf="items.length == 1">{{item.PayerName}} </span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 1">
+                                <span class="ng-value-label"> {{items.length}} checked</span>
+                            </div>
+                        </ng-template>
+                    </ng-select>
+
+
+                </div>
+                <div *ngIf="isQM || isQMCount || isQMSummary">
+                    <div class="form-group">
+                        <label>QM Type</label>
+
+                        <ng-select [items]="qmTypes" groupBy="groupId" [multiple]="true" placeholder="Select" [searchable]="false"
+                            [selectableGroupAsModel]="false" [closeOnSelect]="false" [selectableGroup]="true" name="qm"
+                            [(ngModel)]="selQMType">
+
+                            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                <span>Check all</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                <span>{{item.QMTypeDesc}}</span>
+                            </ng-template>
+
+                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+
+                                <div class="ng-value" *ngFor="let item of (items ? items.slice(0,1): [])">
+                                    <span class="ng-value-label " *ngIf="items.length == 1">{{item.QMTypeDesc}} </span>
+                                </div>
+                                <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length }} checked</span>
+                                </div>
+                            </ng-template>
+                        </ng-select>
+
+                    </div>
+                </div>
+                <div *ngIf="(isQM && !isQMCount && !isQMSummary) || (filterService.isQMAverageDrillDown.get())">
+                    <div class="form-group">
+                        <label>Stay Length: </label>
+
+                        <ng-select [items]="stay" [clearable]="false" bindLabel="label" placeholder="Select" [selectableGroupAsModel]="false" [searchable]="false"
+                            [closeOnSelect]="true" [selectableGroup]="true" name="cat" [(ngModel)]="selStay">
+                        </ng-select>
+
+                    </div>
+                </div>
+                <div *ngIf="isTwentyFourHour">
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <div class="multiselect-wrapper">
+
+                            <ng-select [items]="categories" groupBy="groupId" [multiple]="true" placeholder="Select" [searchable]="false"
+                                [selectableGroupAsModel]="false" [closeOnSelect]="false" [selectableGroup]="true"
+                                name="cat" [(ngModel)]="selCategories">
+
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                    <span>Check all</span>
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                    <span>{{item.TagName}}</span>
+                                </ng-template>
+
+                                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+
+                                    <div class="ng-value" *ngFor="let item of (items ? items.slice(0,1): [])">
+                                        <span class="ng-value-label " *ngIf="items.length == 1">{{item.TagName}} </span>
+                                    </div>
+                                    <div class="ng-value" *ngIf="items.length > 1">
+                                        <span class="ng-value-label">{{items.length }} checked</span>
+                                    </div>
+                                </ng-template>
+
+                            </ng-select>
+
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isKeywordSearch">
+                    <div class="form-group">
+                        <label>Type:</label>
+                        <div class="multiselect-wrapper">
+
+                            <ng-select [items]="type" [multiple]="true" placeholder="Select" [searchable]="false"
+                                [selectableGroupAsModel]="false" [closeOnSelect]="false" [selectableGroup]="true"
+                                name="cat" [(ngModel)]="selType">
+
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                                    <span>{{item.label}}</span>
+                                </ng-template>
+
+                            </ng-select>
+
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isKeywordSearch">
+                    <div class="form-group custom-control custom-checkbox">
+                        <div>
+                            &nbsp;<input type="checkbox" id="chkOnlyDischargedData" [(ngModel)]="chkOnlyDischarged"
+                                [checked]="chkOnlyDischarged" style="vertical-align: sub;">
+                            &nbsp;<label>Only Discharged Residents</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info btn-small" type="button" (click)="applyFilter()"><i class="fa fa-floppy-o"
+                            title="Save Filter"></i>&nbsp;Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

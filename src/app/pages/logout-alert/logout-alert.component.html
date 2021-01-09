@@ -1,0 +1,9 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h3>Are you still using Real Time Portal? If not, we will log you out.</h3>
+  </div>
+  <div class="modal-body">
+    <ngb-progressbar [value]="100" [striped]="true" [animated]="true" type="warning">You will be logged
+      out in {{countDownValue}} second(s).</ngb-progressbar>
+  </div>
+</ng-template>

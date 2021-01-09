@@ -1,0 +1,8 @@
+<div>
+    <div *ngIf="cardFilterOptions && cardFilterOptions.length > 0">
+      <ng-select [items]="cardFilterOptions" [clearable]="false" bindLabel="Name" bindValue="Id"
+        [(ngModel)]="selectedOptionId" (change)="changeSelectedFilterOption()" class="cardFilter">
+      </ng-select>
+    </div>
+  </div>
+  

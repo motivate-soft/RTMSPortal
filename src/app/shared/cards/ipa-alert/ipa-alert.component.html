@@ -1,0 +1,5 @@
+<div *ngIf="data.seriesData">
+  <rtms-grid [options]="data.options" [rowData]="data.seriesData[0].Answers" [reportId]="data.reportId"
+    [showSearch]="data.showSearch" [hideFooter]="false">
+  </rtms-grid>
+</div>

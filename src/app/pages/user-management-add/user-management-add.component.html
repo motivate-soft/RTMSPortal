@@ -1,0 +1,192 @@
+<div id="wrapper">
+    <!-- BEGIN PAGE WRAPPER -->
+    <div id="page-wrapper" class="page-wrapper alt-background-color">
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <div class="page-header pull-left">
+                <div class="page-title">User Management</div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+        <div>
+            <div class="col-lg-1 col-md-1 col-sm-1">&nbsp;</div>
+            <div>
+                <form #frmEditUser="ngForm" novalidate (ngSubmit)="onSave(frmEditUser.valid)">
+                    <table class="col-lg-10 col-md-10 col-sm-10" style="text-align: left;">
+                        <tr>
+                            <td colspan="2">
+                                <h3><b>{{_pageTitle}}</b></h3>
+                            </td>
+                        </tr>
+                        <tr ng-show="_errorMessages.length > 0">
+                            <td colspan="2" class="validation-error">
+                                <ul>
+                                    <li *ngFor="let field of _errorMessages">
+                                        {{field.ErrorMessages}}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label">
+                                <label>First Name</label>
+                            </td>
+                            <td class="input-field">
+                                <input type="text" class="form-control" [(ngModel)]="_userData.NameFirst" id="nameFirst"
+                                    name="nameFirst" #nameFirst="ngModel" maxlength="50" required>
+                                <p [hidden]="nameFirst.valid || (nameFirst.pristine && !_submitted)"
+                                    class="validation-error">First Name is required</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label">
+                                <label>Last Name</label>
+                            </td>
+                            <td class="input-field">
+                                <input type="text" class="form-control" [(ngModel)]="_userData.NameLast" name="nameLast" #nameLast="ngModel"
+                                  maxlength="50" required />
+                                  <p [hidden]="nameLast.valid || (nameLast.pristine && !frmEditUser.submitted)" class="validation-error">Last Name is required</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label"><label>Email Address</label></td>
+                            <td class="input-field">
+                                <input type="text" class="form-control" [(ngModel)]="_userData.EmailAddress"
+                                    name="emailAddress" #emailAddress="ngModel" maxlength="100" email />
+                                <p [hidden]="emailAddress.valid || (emailAddress.pristine && !_submitted)"
+                                    class="validation-error">Email address is not valid</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label"><label>User Name</label></td>
+                            <td class="input-field">
+                                <input type="text" class="form-control" [(ngModel)]="_userData.UserName" name="username"
+                                    #username="ngModel" maxlength="20" required #userName="ngModel">
+                                <p [hidden]="userName.valid || (userName.pristine && !_submitted)"
+                                    class="validation-error">User Name is required</p>
+                            </td>
+                        </tr>
+                        <tr *ngIf="_userData.UserId>0">
+                            <td colspan="2">
+                                <span (click)="toggleResetPasswordModel()" style="cursor: pointer;">
+                                  <span class="active-text">Reset Password</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label">
+                                <label style="float: left; white-space: nowrap;">Give user access to the following
+                                    facility</label>
+                            </td>
+                            <td>
+                                <select class="form-control" size="1" [(ngModel)]="_userData.OrganizationId"
+                                    name="organization" #organization="ngModel" [ngModelOptions]="{standalone:true}"
+                                    [pattern]="greaterThanZeroPattern">
+                                    <option *ngFor="let fac of _userData.Facilities" [value]="fac.OrganizationId"
+                                        required>
+                                        {{fac.OrganizationName}}
+                                    </option>
+                                </select>
+                                <p [hidden]="organization.valid || (organization.pristine && !_submitted)"
+                                    class="validation-error">Facility is required</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label"></td>
+
+                            <td class="input-field">
+                                <div class="alert alert-warning dashboard-availability-warning" role="alert">
+                                    Dashboard will only work if the feature is enabled for the selected facility.
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="input-label">
+                                <label>Default Dashboard</label>
+                            </td>
+                            <td class="input-field">
+                                <select [(ngModel)]="_userData.DefaultDashboard" class="form-control" size="1"
+                                    [ngModelOptions]="{standalone:true}">
+                                    <option *ngFor="let item of _dashboardTypes" [value]="item.DashboardId" required>
+                                        {{item.DashboardName}}
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label">
+                                <label>Time Zone</label>
+                            </td>
+                            <td class="input-field">
+                                <select class="form-control" size="1" [(ngModel)]="_userData.TimeZoneId" name="timezone"
+                                    #timezone="ngModel" [ngModelOptions]="{standalone:true}"
+                                    [pattern]="greaterThanZeroPattern">
+                                    <option *ngFor="let tz of _timeZoneData" [value]="tz.TimeZoneId">
+                                        {{tz.TimeZoneDesc}}
+                                    </option>
+                                </select>
+                                <p [hidden]="timezone.valid || (timezone.pristine && !_submitted)"
+                                    class="validation-error">Time Zone is required</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-label">
+                                <label>Staff Type</label>
+                            </td>
+                            <td class="input-field">
+                                <select class="form-control" size="1" [(ngModel)]="_userData.StaffTypeId"
+                                    name="staffType" #staffType="ngModel" [ngModelOptions]="{standalone:true}"
+                                    [pattern]="greaterThanZeroPattern">
+                                    <option *ngFor="let st of _staffTypeData" [value]="st.StaffTypeId">
+                                        {{st.Name}}
+                                    </option>
+                                </select>
+                                <p [hidden]="staffType.valid || (staffType.pristine && !_submitted)"
+                                    class="validation-error">Staff Type is required</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="right">
+                                <button type="submit" class="btn btn-info" (click)="_submitted=true">Save&nbsp;<i
+                                        class="fa fa-chevron-circle-right"></i></button>&nbsp;
+                                <button type="button" class="btn btn-dark" (click)="onCancel()">Cancel &nbsp;<i
+                                        class="fa fa-times"></i></button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div>
+            <rtms-feedback></rtms-feedback>
+        </div>
+    </div>
+</div>
+
+<ng-template let-data="rowData" #resetPasswordModal>
+    <div class="modal-header">
+        <div class="modal-header-primary">
+            <span class="modal-title">Confirm Password Reset</span>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+            Are you sure you want to reset {{_userData.NameFirst}} {{_userData.NameLast}}'s password?
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModal()">No</button>
+        <button type="button" class="btn btn-info" (click)="resetPassword()">Yes</button>
+    </div>
+</ng-template>
+
+<confirm (onConfirmAcknowledge)="onConfirmMoveEmailAddress()" 
+    [title]="confirmEmailAddressTitle" 
+    [body]="confirmEmailAddressBody" 
+    #confirmEmailAddress>
+</confirm>

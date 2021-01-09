@@ -1,0 +1,62 @@
+<div class="panel card-panel flip-container" [ngClass]="{'gaugecontrol':cardType == 'gaugeCollection', 'panel-short-card':isShortCard, 'autoHeight':autoHeight}"
+  style="position: relative">
+  <div class="panel-heading">
+    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 prn pln"
+    [ngClass]="{'clickable': isHeaderClickable}"
+      (click)="isHeaderClickable && onHeaderClick()">
+      <strong class="panel-heading-title pull-left topmargin7 reportTitle" [ngClass]="{'with-filter': filterOptions, 'col-md-7 col-sm-7 col-xs-7 pln prn': (cardType === 'grid' || cardType === 'pdpmWorksheet')}"
+        [attr.title]="chartName" id="ReportHeader_{{reportId}}">{{chartName}}
+        <a *ngIf="showResetDetailsIcon !== true ? false : true" style="margin-left:10px;"
+          (click)="resetCardDetails.emit()" title="Click here to reset back to all facilities.">
+          <i class="fa fa-undo" aria-hidden="true"></i>
+        </a>
+      </strong>
+      <div *ngIf="filterOptions" class="pull-right hidden-xs">
+        <rtms-card-filter [cardFilterOptions]="filterOptions" [reportId]="reportId"></rtms-card-filter>
+      </div>
+      <div class="no-padding-left pull-left topmargin7" *ngIf="detailInfo && (cardType === 'grid' || cardType === 'pdpmWorksheet')" [ngClass]="getDetailInfoClass()">
+        <div class="panel-heading-date reportTitle" [attr.title]="'Detail Date'">
+          <span class="text"
+            [ngClass]="detailInfo ? (chartName ? 'hidden-md hidden-sm' : ''):''">
+            <span class="colon"
+              [ngClass]="detailInfo ? (chartName ? 'hidden-xs' : ''):'hidden'">Detail
+              Date: </span>
+          </span>
+          <span class="text date">{{detailInfo}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right padding-x-sm">
+      <div class="row">
+        <rtms-export-data [templateId]="templateId" [chartName]="chartName" [reportId]="reportId"
+          [exportDisabled]="exportDisabled" [isDetailed]="false" (export)="onExport($event)">
+        </rtms-export-data>
+      </div>
+    </div>
+  </div>
+  <div [ngClass]="cardType === 'grid'? 'panel-content': 'panel-body'" *ngIf="hasData || !hasData && (cardType == 'line' || cardType === 'grid')">
+    <ng-content></ng-content>
+    <div *ngIf="flipCard" class="clickable flip-text" (click)="executeFlip()"  [ngStyle]="{'position':'absolute', 'left': '1%'}">
+      <div class="card-info"> <a  title="Click here to see the other side of this card.">
+          <i class="fa fa-backward fa-2x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!hasData && (cardType != 'line' && cardType !== 'grid')" class="panel-body">
+    <div class="noContent">
+      <rtms-no-data-found class="rtms-card" *ngIf="hasData === false" [noDataMessage]="noDataMessage"></rtms-no-data-found>
+      <div *ngIf="flipCard && hasData" ngClass="'clickable'" (click)="executeFlip()" [ngClass]="flip-text" [ngStyle]="{'position':'absolute', 'left': '1%'}">
+        <div class="card-info"> <a  title="Click here to see the other side of this card.">
+            <i class="fa fa-backward fa-2x" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="citation">
+      <rtms-information [chartName]="chartName" [reportId]="reportId" [embedChart]="!hasData ? false : embedChart">
+      </rtms-information>
+    </div>
+
+  </div>
+</div>

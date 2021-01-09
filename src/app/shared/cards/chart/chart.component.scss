@@ -1,0 +1,27 @@
+highcharts-chart {
+  display: block;
+  //height: auto; // tell the chart to fill 100% of the height of the 'c' container
+  //width: 100%
+}
+
+.chart-container, highcharts-chart {
+  width: 100%;
+  margin: 0 auto;
+}
+.tocCARDScores .chart-container-wrapper {
+  justify-content: space-around;
+  display: grid;
+}
+
+.rehospDashboardChart .chart-container-wrapper {
+  justify-content: space-around;
+  display: flex;
+}
+
+.chart-container-wrapper {
+  overflow: hidden; /* important to keep, because of resize overlap */
+}
+
+.chart-container.pie .the-box{
+    padding: 15px 5px;
+}

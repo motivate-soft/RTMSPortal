@@ -1,0 +1,10 @@
+<div
+  #illogicalPopover="ngbPopover"
+  ngbPopover="{{illogicalData}}"
+  container="body" placement="top" [autoClose]="'outside'" class="{{illogicalBgColor}}"
+  [ngClass]="illogicalData ? 'cursor table-cell-padding': 'table-cell-padding'"
+  [attr.title]="illogicalTooltip"
+  (shown)="shownPopover()"
+  (hidden)="hiddenPopover()">{{illogicalAdlData}}&nbsp;
+  <i class="fa adlvsmds-score-indicator" aria-hidden="true" [ngClass]="illogicalStateClass"></i>
+</div>

@@ -1,0 +1,69 @@
+<div class="rtmsgrid panel-heading" *ngIf="displaySearch()">
+    <div class="row">
+        <div class="searchbox col-md-4 col-sm-4 col-xs-4" style="float:right;z-index: 2;">
+            <div class="input-group">
+                <input class="form-control" placeholder="Search" [(ngModel)]="context.Filter" #searchBox
+                  (input)="onSearchChange($event.target.value)">
+            </div>
+        </div>
+      </div>
+</div>
+<div style="float:clear;height: 30px;border-bottom: 1px solid gainsboro;margin-bottom: 10px" *ngIf="displaySearch()"></div>
+<div *ngIf="showNoDataMessage()" class="no-data">There are currently no records to display. Please enter or adjust the search phrase to return some data.</div>
+<div class="grid-container" *ngIf="!showNoDataMessage()">
+    <table border="1" id="tblGridHeader" (resized)="resizeHeaders()">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" width="{{column.width}}" class="resident-grid-padding grid-header" (click)="onSortChanged(column)" id="th_{{column.field}}">
+            {{column.headerName}}
+            <i *ngIf="context.SortProperty === column.field" [ngClass]="setSortIcon(context.SortDirection)"></i>
+          </th>
+          <th style="width:18px;">&nbsp;</th>
+        </tr>
+      </thead>
+    </table>
+    <cdk-virtual-scroll-viewport class="list-container list-group"  itemSize="35" [ngClass]="tableClass">
+      <table border="1" id="tblGrid">
+        <tbody>
+          <!--<tr *ngFor="let row of data|gridFilter:columns:context.Filter">-->
+          <tr *cdkVirtualFor="let row of filteredData; let idx = index" [ngClass]="[drillsIntoReportId===0 ? '' : 'cursor']" (click)="drillDown(row)">
+            <td *ngFor="let column of columns" width="{{column.width}}" class="resident-grid-padding" id="td_{{column.field}}_{{idx}}">
+              <div *ngIf="column.columnType===2" [ngStyle]="{'word-wrap':'break-word'}">
+                <a class="action-btn" (click)="renderModal(row)">
+                  {{getPropertyValue(row, column.field)}}
+                </a>
+              </div>
+              <div *ngIf="column.Type!==gridColumnTypes.TemplateColumn && !IsLinkColumn(column)" [ngStyle]="{'word-wrap':'break-word'}" >
+                {{getPropertyValue(row, column.field)}}
+              </div>
+              <div *ngIf="column.Type===gridColumnTypes.TemplateColumn">
+                <ng-container *ngTemplateOutlet="column.ItemTemplate;context:{rowData:row}">
+                </ng-container>
+              </div>
+              <div *ngIf="IsLinkColumn(column)" [ngStyle]="{'word-wrap':'break-word'}">
+                <a class="action-btn" (click)="column.Clicked(row)">
+                  {{getPropertyValue(row, column.field)}}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </cdk-virtual-scroll-viewport>
+</div>
+
+
+<ng-template let-data="rowData" #PDPMAlertModal>
+  <div class="modal-header">
+    <div class="modal-header-primary">
+        <span class="modal-title"></span>
+    </div>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12">
+          {{_currentModalObject.MDSQuestionText}}
+          <p></p>
+          {{_currentModalObject.WorksheetQuestionText}}
+      </div>
+  </div>
+</ng-template>

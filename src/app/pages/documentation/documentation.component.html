@@ -1,0 +1,87 @@
+<div id="wrapper">
+    <!-- BEGIN PAGE WRAPPER -->
+    <div id="page-wrapper" class="page-wrapper">
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <div class="page-header">
+                <div class="page-title center-align">
+                    <div class="page-title-text rp_title" style="float: left;">
+                        <span class="prxl">Documentation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="folder-navigation-breadcrumb" *ngIf="directoryDrillDownHistory.length > 1">
+            <span *ngFor="let item of directoryDrillDownHistory; let $last = last;">
+                <a *ngIf="!$last" class="cursor" (click)="getDirectory(item, true)">
+                    <span>{{item.Name}}</span>
+                </a>
+                <span *ngIf="!$last" class="prs pls breadcrumb-separator"><i class="fa fa-greater-than"></i></span>
+                <span *ngIf="$last">{{item.Name}}</span>
+            </span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="page-content alt-background-color"
+            [ngClass]="{'folder-navigation':directoryDrillDownHistory.length > 1}">
+            <div class="row no-padding">
+                <div class="col-lg-12 col-md-12">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 pull-right no-padding">
+                        <input placeholder="Search" class="form-control" [(ngModel)]="_searchText">
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="data.length > 0">
+                <mat-expansion-panel expanded open (closed)="false">
+                    <div style="height:30px"></div>
+                    <table class="table ignore-table-limits table-bordered table-hover reports_background inbox-item" border="1">
+                        <thead>
+                            <tr>
+                                <th width="2%"></th>
+                                <th width="75%" class="cursor" (click)="sortChanged('Name')">
+                                    <span>Name</span>
+                                    <i [hidden]="sortType!=='Name'" 
+                                        [ngClass]="setSortIcon(sortReverse)"></i>
+                                </th>
+                                <th width="23%" class="cursor" (click)="sortChanged('ServerModifiedDate')">
+                                    <span>Last Modified</span>
+                                    <i [hidden]="sortType!=='ServerModifiedDate'"
+                                        [ngClass]="setSortIcon(sortReverse)"></i>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let item of data|searchFilter:this._searchText"
+                                class="cursor">
+                                <td>
+                                    <span class="icon-div"><i class="fa" [ngClass]="getFileIconClass(item)"></i></span>
+                                </td>
+                                <td>
+                                    <div class="align-middle">
+                                        <a class="cursor" (click)="onClick(item)">
+                                            
+                                            <span>{{item.Name}}</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>{{item.ServerModifiedDate | date:"EEE M/dd/yyyy h:mm a"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </mat-expansion-panel>
+                <div style="height:20px"></div>
+            </div>
+
+            <div class="text-center" id="noInboxItems" *ngIf="data.length <= 0 && showNoDataDiv">
+                <div class="inbox-noreport-text">Currently no documents to view. Have a nice day!!</div>
+                <br />
+                <br />
+                <br />
+                <i class="fab fa-dropbox inbox-noreport-icon" aria-hidden="true"></i>
+            </div>
+        </div>
+        <rtms-feedback></rtms-feedback>
+    </div>
+</div>

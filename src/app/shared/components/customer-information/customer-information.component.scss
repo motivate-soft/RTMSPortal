@@ -1,0 +1,16 @@
+#customerInformation{
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.bottom-nav-open{
+  left: 250px;
+  transition-delay: .1s
+}
+
+.bottom-nav-closed{
+  left: 50px;
+  transition-delay: .1s
+}

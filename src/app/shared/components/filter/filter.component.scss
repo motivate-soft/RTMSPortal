@@ -1,0 +1,46 @@
+
+/* 
+ ::ng-deep .owl-dt-calendar-table .owl-dt-calendar-header .owl-dt-weekdays th {  
+    color: black !important;
+}
+ 
+::ng-deep .owl-dt-container {
+    font-size: inherit !important;
+}
+
+::ng-deep .ng-clear-wrapper{
+    display:none !important;
+} */
+
+.input-group{
+    width: 100% !important;
+}
+
+ ::ng-deep .ui-datepicker {
+    width: inherit !important;
+    &.ui-widget {      
+       display: block !important;
+      
+    }
+} 
+
+::ng-deep .ui-widget-content .ui-state-default {
+    background: none !important;
+    color: black !important;
+}
+
+::ng-deep  .ui-calendar .ui-calendar-button {
+    width: 9% !important;
+}
+::ng-deep .ui-button {
+   
+    height: 34px !important; 
+}
+
+::ng-deep .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-highlight
+{
+    background-color: #d0d0d0 !important;
+}
+::ng-deep .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active  { 
+    background: #2399e5 !important;
+}

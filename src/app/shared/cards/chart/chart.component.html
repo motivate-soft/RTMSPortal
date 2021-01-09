@@ -1,0 +1,12 @@
+<div class="chart-container-wrapper" *ngIf="chartConfig">
+    <!-- <chart class="chart-container piechart-container" [options]="options" (load)="onLoadChart($event.context)">
+    </chart> -->
+   <highcharts-chart class="chart-container "
+        [ngClass]="chartConfig.chartType"
+        [Highcharts]="Highcharts"
+        [options]="options"
+        [callbackFunction]="getChartInstance.bind(this)"
+        [runOutsideAngular]="runOutsideAngular">
+
+   </highcharts-chart>
+</div>

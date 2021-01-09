@@ -1,0 +1,16 @@
+::ng-deep .m_b_o {
+  opacity: 0.75 !important;
+}
+::ng-deep .panel-heading .col-xs-11 {
+  padding-left: 1px;
+}
+.dialog {
+  background-color: #f9f9f9;
+}
+::ng-deep .info-color .modal-dialog .modal-content {
+  background-color: transparent !important;
+}
+.cg-busy-backdrop {
+  background-color: #f9f9f9;
+  opacity: .7;
+}

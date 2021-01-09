@@ -1,0 +1,96 @@
+<div [ngClass]="{ 'portalusage full-height' : isFacPortalUsage } ">
+    <div id="wrapper">
+        <!--BEGIN PAGE WRAPPER-->
+        <div id="page-wrapper" class="page-wrapper" [ngClass]="DashboardClass">
+            <!--BEGIN TITLE & BREADCRUMB PAGE-->
+            <div *ngIf="!isFacPortalUsage && !isKeywordAdminReport">
+                <rtms-reports-header [reportTitle]="DisplayName"
+                    [showFilter]="!isDetailDashboard && !hideFilterButton"
+                    [reportsVm]="genericDashboardVM" [showQms]="isReportDashboard" [showPayers]="!isDetailDashboard"
+                    [showUnits]="!isDetailDashboard" [showTypes]="isReportDashboard"
+                    [showCategories]="isReportDashboard" [currentDisplayReport]="''" [showBackToButton]="showBackButton"
+                    [backButtonText]="isReportDashboard? 'Back to Reports Menu' : 'Back to Dashboard'"
+                    [backButtonHref]="backButtonHref" [showMenu]="false"
+                    [allowChangeOrg]="!isDetailDashboard && !hideFacilityDropdown && !isAdminReports && !isInfectionSurveillance"
+                    [showDischargeOnly]="isReportDashboard" [hideFacilityName]="isAdminReports || isInfectionSurveillance"
+                    [dashboardId]="dashboardId">
+                </rtms-reports-header>
+            </div>
+            <!--END TITLE & BREADCRUMB PAGE-->
+            <!--BEGIN CONTENT-->
+            <div class="page-content" [ngClass]="{ 'portalusage-noPadding' : ( isFacPortalUsage || isKeywordAdminReport ) ,'details': isDetailDashboard, 'multi-report': isMdsDashDetail, 'adlvsmdtable-content': isPDPMWorksheet}" id="step1">
+                <div class="row">
+                    <div id="add-filter"
+                        [ngClass]="{'col-md-2 clearfix': gridFullSize, 'col-md-3 clearfix': !gridFullSize }"
+                        [hidden]="!IsShowFilter">
+                        <rtms-filter #rtmsFilter (reload)="dashboardBuilderReload()"></rtms-filter>
+                    </div>
+
+                    <div id="dashboard-data"
+                        [ngClass]="{'full-width': !IsShowFilter,'col-md-10': gridFullSize, 'col-md-9': !gridFullSize}">
+                        <div class="row">
+                            <div id="draggablePanelList" class="list-unstyled">
+                                <div *ngFor="let control of dashboards">
+                                    <div *ngIf="!control.data.hiddenCard"
+                                        [ngClass]=" control.data.cardClass? control.data.cardClass : control.data.isWideCard? 'col-md-12' : 'col-md-6' "
+                                        id="Dashboard_{{dashboardId}}_card_{{control.ReportId}}">
+                                        <div class="fullscreen-holder chart-position"
+                                            *ngIf="(!control.data.isFooterGrid) || showFooterDetails">
+                                            <div class="fullscreen flip-container"
+                                                [ngClass]="{'hover' : control.data.flipCard && !control.data.flipChartShow}"
+                                                [hidden]="control.data.flipCard && !control.data.flipChartShow ">
+                                                <div [ngBusy]="control.data.statusPromise"
+                                                    [class.flipper]="control.data.flipCard"
+                                                    [ngClass]="getGridClass(control.data.cardType, control.data.gridClass, control.data.isFooterGrid, control.data.reportId)">
+                                                <rtms-card [cardType]="control.data.cardType === 'ipaAlert' ? 'grid' :control.data.cardType"
+                                                        [chartName]="control.data.chartName"
+                                                        [reportId]="control.data.reportId"
+                                                        [templateId]="control.data.templateId"
+                                                        [hasData]="control.data.hasData"
+                                                        [exportDisabled]="control.data.exportDisabled"
+                                                        [embedChart]="control.data.embedChart"
+                                                        [filterOptions]="control.data.filterOptions"
+                                                        [isHeaderClickable]="control.data.isHeaderClickable"
+                                                       [drilldownReport]="control.data.drilldownReport"
+                                                        [drilldownDestination]="control.data.drilldownDestination"
+                                                        [isShortCard]="control.data.isShortCard"
+                                                        (reloadChart)="reloadChart.emit($event)"
+                                                        (resetCardDetails)="resetCardDetails()"
+                                                        [flipCard]="control.data.flipCard"
+                                                        (cardFlipped)="cardFlipped($event)"
+                                                        [detailInfo]="control.data.detailInfo"
+                                                        [drilldownId]="control.data.detailDashboardId"
+                                                        [autoHeight]="control.data.autoHeight && !showFooterDetails"
+                                                        [showResetDetailsIcon]="control.data.showResetDetailsIcon"
+                                                        [exportFilter]="control.data.exportFilter"
+                                                        [noDataMessage]="control.data.noDataMessage">
+                                                        <rtms-chart-wrapper exportable [data]="control.data"  [hasCitation]="control.HasCitation"                                                      
+                                                            (onChartClick)="gotoDetails($event)"
+                                                            (gridRowClick)="( (control.data.drillDownGridId || control.data.detailDashboardId || (control.data.gridOptions && control.data.gridOptions.rowClickEnabled)) && gridRowClicked($event))"
+                                                            (gridCellClick)="gridCellDrillDown($event)">
+                                                        </rtms-chart-wrapper>
+                                                    </rtms-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--END CONTENT-->
+            <div>
+                <rtms-feedback></rtms-feedback>
+            </div>
+            <div>
+                <rtms-resident-card-score-detail #residentCardScoreDetailComponent></rtms-resident-card-score-detail>
+            </div>
+            <div>
+                <rtms-resident-lab-results #residentLabResultsComponent ></rtms-resident-lab-results>
+            </div>
+        </div>
+        <!--END PAGE WRAPPER-->
+    </div>
+</div>

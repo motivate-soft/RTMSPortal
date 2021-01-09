@@ -1,0 +1,54 @@
+<div class="residentscore">
+    <a class="cursor" [hidden]="this._hideIndicator || this._showSpinner" title="Click to show CARD score detail"
+      (click)="this.showDetail(p1)" [ngbPopover]="scorePopOver" id="ngbPopover" #p1="ngbPopover" container="body"
+      placement="right" triggers="outsideClick" popoverClass="residentdot popover-layout">
+      <i class="fa fa-circle residentIndicator" id="indicator" [ngStyle]="{'color': this._indicatorColor}"></i>
+  </a>
+  <span [hidden]="!this._showSpinner"
+        title="Retrieving score details..."
+        [ngStyle]="{'color': this._indicatorColor}">
+      <i class="fa fa-refresh fa-spin"></i>
+  </span>
+
+  <rtms-resident-card-score-detail #residentCardScoreDetailComponent></rtms-resident-card-score-detail>
+
+  <ng-template #scorePopOver>
+      <div [hidden]="_residentScoreDetail == null">
+          <h3 class="popover-title">
+              {{_residentScoreDetail.Resident}}
+              <span class="cursor mrs detail-link" (click)="viewDetails(p1)" title="Click to view details">View Details</span>
+              <span id="ngbPopoverClose" class="cursor pull-right" (click)="closePopover(p1)"><i class="fa fa-close"></i></span>
+          </h3>
+          <div class="pts pbs">
+              <div class="row">
+                  <div class="col-md-4 prn text-center" [ngStyle]="{'color':_indicatorColor}">
+                      <div class="mls">
+                          <span class="col-md-12 pln prn text-center ptn score ng-binding resident-score-value">
+                            {{_residentScoreDetail.TotalScore}}
+                          </span>
+                          <span class="col-md-12 text-center ptn prn pln">CARD score</span>
+                      </div>
+                  </div>
+                  <div class="col-md-8 pln prn">
+                      <div class="col-md-12">
+                          <span class="col-md-9">Clinical Alerts:</span>
+                          {{_residentScoreDetail.AlertScore}}
+                      </div>
+                      <div class="col-md-12">
+                          <span class="col-md-9">Admission Recency:</span>
+                          {{_residentScoreDetail.LengthOfStayScore}}
+                      </div>
+                      <div class="col-md-12">
+                          <span class="col-md-9">Readmitted:</span>
+                          {{_residentScoreDetail.AcuityScore}}
+                      </div>
+                      <div class="col-md-12">
+                          <span class="col-md-9">Diagnoses:</span>
+                          {{_residentScoreDetail.DiagnosisScore}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</div>

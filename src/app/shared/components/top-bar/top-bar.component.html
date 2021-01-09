@@ -1,0 +1,42 @@
+<div *ngIf="this._showTopBar">
+  <!--BEGIN BACK TO TOP-->
+  <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+  <!--END BACK TO TOP-->
+  <!--BEGIN TOPBAR-->
+  <div id="header-topbar-option-demo" class="page-header-topbar">
+      <nav id="topbar" role="navigation" style="margin-bottom: 0;" class="navbar navbar-default navbar-static-top">
+          <div class="navbar-header hidden-sm hidden-xs">
+              <span id="logo" (click)="this._navigationService.navigateSelectedOrganizationDashboard()" class="navbar-brand" style="cursor: pointer;">
+                <span class="fa fa-rocket"></span>
+                <span class="logo-text">
+                    <img class="logotype" src="/src/assets/images/logo-rtms.png" alt="Logo">
+                </span>
+            </span>
+        </div>
+          <div class="topbar-main">
+             <rtms-notification *ngIf="_loggedInUser != null" style="float:left;"></rtms-notification>
+             <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle menu-toggle" *ngIf="_loggedInUser != null">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+              <ul class="nav navbar navbar-top-links navbar-right mbn " *ngIf="_loggedInUser != null" style="float: right;margin-left: 10px;right:50px">
+                  <li class="dropdown topbar-user user-parent" data-step="1" dropdown is-open="_topBarIsOpen" (mouseleave)="_topBarIsOpen=false"
+                      (click)="_topBarIsOpen=!_topBarIsOpen">
+                      <a class="dropdown-toggle">
+                          <span class="fa fa-user"></span>&nbsp;<span class="hidden-xs">{{_loggedInUser.FirstName + ' ' + _loggedInUser.LastName + ' - ' + _loggedInUser.OrganizationNameAbbrev}}</span>&nbsp;<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user user-child" *ngIf="_topBarIsOpen">
+                          <li><a class="sidebar-item" (click)="this._stateService.transitionTo('home.userSettings', { reload: true })"><i class="fa fa-cog"></i>My Settings</a></li>
+                          <li *ngIf="_userAdminEnabled"><a class="sidebar-item" (click)="this._stateService.transitionTo('home.userManagement', { reload: true })"><i class="fa fa-user-plus"></i>User Management</a></li>
+                          <li><a class="sidebar-item" (click)="this._stateService.transitionTo('home.lockScreen', { reload: true })" ><i class="fa fa-lock"></i>Lock Screen</a></li>
+                          <li><a (click)="this._stateService.transitionTo('home.logout', { reload: true })"><i class="fa fa-sign-out"></i>Log Out</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+  </div>
+  <!--END TOPBAR-->
+</div>

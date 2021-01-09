@@ -1,0 +1,12 @@
+<div class="number-widget-container container">
+  <table style="width: 100%;" [ngClass]="isFullScreen ? 'tableFullScreen' : 'tableNormal'">
+        <tr *ngFor="let group of dataGroupings;">
+          <td *ngFor="let item of group" class="cell" [style.background-color]="item.CardColor" align="center" [ngClass]="isFullScreen ? 'cellHeightNormal' : 'cellHeightNormal'"
+          (click)="(item.HasValue || item[options.hasValueProp]) && allowOnClick && getDrillDown(item,popover)" [ngStyle]="getStyle(item)">
+            <span class="score">{{item.Value}}</span><br/><span class="description">{{item.ItemName}}</span><br/><span class="date">{{item.ValueDescription}}</span>
+          </td>
+        </tr>
+  </table>
+</div>
+
+<rtms-resident-vitals-by-category #residentVitalByCategoryComponent ></rtms-resident-vitals-by-category>

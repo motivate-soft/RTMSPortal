@@ -1,0 +1,155 @@
+.number-widget-container {
+    height: 100%;
+    width: 100%;
+}
+
+    .number-widget-container .number-widget {
+        height: 100%;
+        text-align: center;
+        padding: 2px 5px 2px;
+    }
+
+        .number-widget-container .number-widget .inner-container {
+            width: 100%;
+            height: 100%;
+            /*border: 3px solid;*/
+            margin: 0 auto;
+        }
+
+.valign-middle:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.number-widget-container .number-widget .value {
+    width: 100%;
+    height: 60%;
+    text-align: center;
+    margin: 0 auto;
+    font-family: Arial Narrow, Arial, sans-serif;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.number-widget-container .number-widget .value.small {
+    font-size: 30px;
+}
+
+.number-widget-container .number-widget {
+    font-size: 48px;
+}
+
+
+.number-widget-small-label {
+  font-size: 12px !important;
+}
+
+.number-widget-label {
+    font-size: medium;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.number-widget-container .number-widget .numberwidget-header .header-sub {
+    margin: 0px 5px;
+    font-size: medium;
+}
+
+.number-widget-container .number-widget.small .numberwidget-header .header-sub {
+    font-size: 13px;
+    padding: 3px;
+}
+
+.number-widget-container .number-widget.medium .numberwidget-header .header-sub {
+    font-size: 15px;
+    padding: 5px;
+}
+
+.number-widget-container .number-widget.large .numberwidget-header .header-sub {
+    font-size: 20px;
+    padding: 7px;
+}
+
+.number-widget-container .number-widget.x-large .numberwidget-header .header-sub {
+    font-size: 22px;
+    padding: 9px;
+}
+
+@media only screen and (min-width : 1430px ) and (max-width : 1610px) {
+    .number-widget-container .number-widget {
+        font-size: 40px;
+    }
+}
+
+
+
+@media only screen and (min-width : 1155px ) and (max-width : 1430px) {
+    .number-widget-container .number-widget {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (min-width : 992px ) and (max-width : 1155px) {
+    .number-widget-container .number-widget {
+        font-size: 16px;
+    }
+
+        .number-widget-container .number-widget .numberwidget-header.medium .header-sub {
+            font-size: small;
+        }
+}
+
+@media only screen and (max-width : 380px) {
+    .number-widget-label {
+        font-size: 10px;
+    }
+
+    .number-widget-container .number-widget .numberwidget-header.medium .header-sub {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width : 515px) {
+    .number-widget-container .number-widget {
+        font-size: 19px;
+    }
+}
+
+.number-widget-container .number-widget .value.large {
+    font-size: 64px;
+}
+
+.number-widget-container .number-widget .value.x-large {
+    font-size: 90px;
+}
+
+.number-widget-container .number-widget .numberwidget-header {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.number-widget-container .number-widget.small .numberwidget-header .header-main {
+    font-size: 12px;
+}
+
+.number-widget-container .number-widget.medium .numberwidget-header .header-main {
+    font-size: 12px;
+}
+
+.number-widget-container .number-widget.large .numberwidget-header .header-main {
+    font-size: 15px;
+}
+
+.number-widget-container .number-widget.x-large .numberwidget-header .header-main {
+    font-size: 18px;
+}
+
+.number-widget-container .border {
+    border: 6px solid;
+}

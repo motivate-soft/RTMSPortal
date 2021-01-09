@@ -1,0 +1,24 @@
+<div class="info">
+  <div class="full-height">
+      <!--BEGIN PAGE WRAPPER-->
+      <div id="wrapper">
+          <div id="page-wrapper" class="page-wrapper no-breadcrumb">
+              <div class="page-content full-height">
+                  <div class="row full-height">
+                      <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                      <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                      <ul>
+                          <li><a (click)="throwError(504)" class="clickable">504 Error (API Timeout Exception)</a> - SHOULD SHOW TOASTR & LOG API ERROR</li>
+                          <li><a (click)="throwError(500)" class="clickable">500 Error (Unhandled Exception)</a> - SHOULD SHOW TOASTR & LOG API ERROR</li>
+                          <li><a (click)="throwError(401)" class="clickable">401 Error (Unauthorized Exception)</a> - SHOULD LOG YOU OUT</li>
+                          <li><a (click)="throwError(403)" class="clickable">403 Error (Forbidden Exception)</a> - SHOULD LOG YOU OUT</li>
+                          <li><a (click)="throwJavascriptError()" class="clickable">Javascript Error (Forbidden Exception)</a> - SHOULD LOG TO CONSOLE</li>
+                      </ul>
+
+                      <!--END PAGE WRAPPER-->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

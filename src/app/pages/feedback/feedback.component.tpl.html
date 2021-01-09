@@ -1,0 +1,29 @@
+<div>
+    <div class="feedbackbtn helpbtn" id="help-feedback" style="top:0px;z-index:1000;right:0px; height:50px; border-radius:0">
+        <h2 (click)="setFeedbackStep(2)">
+            <span data-hover="tooltip" title="Help"><i class="fa fa-question-circle"></i></span>
+        </h2>
+    </div>
+    <div class="feedbackbtn" id="help-feedback" style="margin-right:10px;">
+        <h3 (click)="toggleFeedbackPanel()">
+            <span><i class="fa fa-envelope"></i> Help &amp; Feedback</span>
+            <a class="clickable pull-right" *ngIf="feedbackStep > 0"><i class="fa fa-minus"></i></a>
+        </h3>
+        <div>
+            <div class="feedback-form">
+                <div class="welcome-msg" *ngIf="feedbackStep===3">
+                    <h4>Thanks for your message!</h4>
+                </div>
+                <div *ngIf="feedbackStep===2">
+                    <div class="form-group">
+                        <div id="instructions" style="padding-left:5px;">Customer Support: (888) 546-9786. Or, you can submit your help request here:</div>
+                        <textarea class="form-control" rows="10" [(ngModel)]="message" placeholder="Your message"></textarea>
+                    </div>
+                    <div class="">
+                        <button type="button" class="btn btn-sm btn-info" (click)="sendEmail()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

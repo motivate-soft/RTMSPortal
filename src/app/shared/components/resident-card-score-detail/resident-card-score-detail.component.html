@@ -1,0 +1,124 @@
+<ng-template #template>
+    <div class="modal-header">
+
+            <button class="close" (click)='this.closeModals()'><i class="fa fa-close "></i></button>
+            <span class="modal-title">
+                <i class="fa fa-circle" style="vertical-align: 5px" [ngStyle]="{'color': this._indicatorColor}">
+                </i>
+                {{_residentScoreDetail.Resident}}
+                <span class="cursor mrs detail-link" (click)='this.exportResidentCARDDetail()'>
+                  <i class="menu-icon" style="vertical-align: -4px">a</i>
+                  <span class="text" style="font-size: 75%;color:#f46f34;">Export to PDF</span>
+                </span>
+            </span>
+
+    </div>
+    <div class="modal-body">
+        <tabset>
+            <tab>
+                <ng-template tabHeading>
+                    <i class="fas fa-poll-h" aria-hidden="true"></i> CARD Details
+                </ng-template>
+                <div class="tab-content tab-main-content">
+                    <div class="row indicator">
+                        <div class="col-md-12 pln">
+                            <div class="col-xs-1 text-right title">
+                                <span>{{this._residentScoreDetail.AlertScore}}</span>
+                            </div>
+                            <div class="col-md-11 pln">
+                                <div class="col-md-12 pln title">
+                                    <span>Clinical Alerts </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul *ngIf="_residentScoreDetail.AlertScore > 0">
+                                        <li *ngFor="let detail of _residentScoreDetail.AlertDetailsParsed">{{detail}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pln gray-background">
+                            <div class="col-xs-1 text-right title">
+                                <span>{{_residentScoreDetail.LengthOfStayScore}}</span>
+                            </div>
+                            <div class="col-md-11 pln">
+                                <div class="col-md-12 pln title">
+                                    <span>Admission Recency </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul *ngIf="_residentScoreDetail.LengthOfStayScore > 0">
+                                        <li>{{_residentScoreDetail.LengthOfStayDetail}} Day<span *ngIf="_residentScoreDetail.LengthOfStayDetail > 1">s</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pln">
+                            <div class="col-xs-1 text-right title">
+                                <span>{{_residentScoreDetail.AcuityScore}}</span>
+                            </div>
+                            <div class="col-md-11 pln">
+                                <div class="col-md-12 pln title">
+                                    <span>Readmitted </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul *ngIf="_residentScoreDetail.AcuityScore > 0">
+                                        <li>Last admitted: {{_residentScoreDetail.AcuityDetail}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pln gray-background">
+                            <div class="col-xs-1 text-right title">
+                                <span>{{_residentScoreDetail.DiagnosisScore}}</span>
+                            </div>
+                            <div class="col-md-11 pln">
+                                <div class="col-md-12 pln title">
+                                    <span>Diagnoses </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul *ngIf="_residentScoreDetail.DiagnosisScore > 0">
+                                        <li *ngFor="let detail of _residentScoreDetail.DiagnosisDetailsParsed">{{detail}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pln tally" [ngStyle]="{'background-color': this._indicatorColor}">
+                            <div class="col-xs-1 text-right title">
+                                <span>{{_residentScoreDetail.TotalScore}}</span>
+                            </div>
+                            <div class="col-md-11 pln">
+                                <div class="col-md-12 pln title">
+                                    <span>Total Score </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab>
+              <div *ngIf=" _residentScoreDetail.KeywordsEnabled">
+                <ng-template tabHeading>
+                    <i class="fas fa-key" aria-hidden="true"></i> Keywords
+                </ng-template>
+                <div class="tab-content tab-main-content">
+                    <div>
+                        <div *ngFor="let keyword of _residentScoreDetail.Keywords" class="keyword-item">
+                            <div class="meta"><span class="keyword">{{keyword.Keyword}}</span> - noted by <span class="author">{{keyword.Initials}}</span> on <span class="date">{{keyword.EventDt}}</span>.</div>
+                            <div class="phrase" [innerHTML]="keyword.KeywordPhrase"></div>
+                        </div>
+                        <rtms-no-data-found *ngIf="_residentScoreDetail.Keywords.length == 0"></rtms-no-data-found>
+                    </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+                <ng-template tabHeading>
+                    <i class="fas fa-tasks" aria-hidden="true"></i> Interventions
+                </ng-template>
+                <div class="tab-content tab-main-content interventions">
+                    <div *ngIf="_residentScoreDetail.AlertsAndInterventions" [innerHTML]="_residentScoreDetail.AlertsAndInterventions"></div>
+                    <rtms-no-data-found *ngIf="!_residentScoreDetail.AlertsAndInterventions"></rtms-no-data-found>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+  </ng-template>

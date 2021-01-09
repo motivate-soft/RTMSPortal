@@ -1,0 +1,25 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Switch Organization</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form" novalidate (ngSubmit)="onSave(form, organizationSelector)">
+            <div class="form-group">
+                <label>Select Organization</label>
+                <select class="form-control" size="1" formControlName="organizationId">
+                    <option *ngFor="let org of organizations" [value]="org.OrganizationId" required>
+                        {{org.OrganizationName}}
+                    </option>
+                </select>
+                <div class="error-message" [hidden]="form.controls.organizationId?.valid || (form.controls.organizationId?.pristine && !formSubmitted)">
+                    <span [hidden]="!form.controls.organizationId?.errors?.required">Organization is required.</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="save()">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
+    </div>
+  </ng-template>
+

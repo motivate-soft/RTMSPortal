@@ -1,0 +1,82 @@
+<div class="full-height">
+    <!--BEGIN PAGE WRAPPER-->
+    <div id="wrapper">
+        <div id="page-wrapper" class="page-wrapper no-breadcrumb">
+            <div class="page-content portalusage-noPadding">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="fullscreen-holder reportSmallFont">
+                            <div class="fullscreen">
+                                <div class="fixed-height-report fh-double-tables fh-short-title financedetail_bottomMargin financialdetail_table" id="dashboard-detail">
+                                    <div class="panel user-panel">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <button type="button" class="btn btn-info" (click)="addUser()">
+                                                        Add New User
+                                                        &nbsp;<i class="fa fa-chevron-circle-right"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 toggle_btn">
+                                                <mat-slide-toggle
+                                                    class="example-margin"  [(ngModel)]="_showDeleted"
+                                                    [color]="'blue'" (change)="toggleDisabledUsers()" >
+                                                    <label>&nbsp;&nbsp;&nbsp;Show disabled users?</label>&nbsp;&nbsp;&nbsp;
+                                                </mat-slide-toggle>
+                                                <rtms-export-data [chartName]="_chartName" [reportId]="_reportId" (export)="onExport($event)" style="position:absolute;right:20px;z-index: 1000;margin-top:0px;">
+                                                </rtms-export-data>
+                                            </div>
+                                        </div>
+                                        <!--button type="button" class="btn btn-info" (click)="addUser()" style="margin-left: 100px;margin-top: 8px;position: absolute;z-index:2;">
+                                            Add New User
+                                            &nbsp;<i class="fa fa-chevron-circle-right"></i>
+                                        </button>
+                                        <mat-slide-toggle
+                                            class="example-margin"  [(ngModel)]="_showDeleted"
+                                            [color]="'blue'" (change)="toggleDisabledUsers()" style="margin-left: 300px;margin-top: 8px;position: absolute;z-index:2;">
+                                            <label>&nbsp;&nbsp;&nbsp;Show disabled users?</label>&nbsp;&nbsp;&nbsp;
+                                        </mat-slide-toggle>
+                                        <rtms-export-data [chartName]="_chartName" [reportId]="_reportId" (export)="onExport($event)"
+                                            style="position:absolute;right:20px;z-index: 1000;margin-top:8px;">
+                                        </rtms-export-data-->
+                                        <div class="panel-content">
+                                            <rtms-grid-v2 #rtmsGridComponent [columns]="_gridColumns" [data]="_gridData" ></rtms-grid-v2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <rtms-feedback></rtms-feedback>
+        </div>
+    </div>
+</div>
+
+<ng-template let-data="rowData" #itemTemplateForToggleUser>
+    <span *ngIf="data.IsDeleted" (click)="toggleActive(data)" style="cursor: pointer;">
+      <span class="inactive-text">Inactive</span> Click here to Activate
+    </span>
+    <span *ngIf="!data.IsDeleted" (click)="toggleDeactiveModel(data)" style="cursor: pointer;">
+      <span class="active-text">Active</span> Click here to Deactivate
+    </span>
+</ng-template>
+
+<ng-template let-data="rowData" #deactivateUserModal>
+  <div class="modal-header">
+    <div class="modal-header-primary">
+        <span class="modal-title">Confirm Deactive User</span>
+    </div>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12">
+          Are you sure you want to deactivate {{_currentUser.NameFirst}} {{_currentUser.NameLast}}?
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="closeModal()" >No</button>
+      <button type="button" class="btn btn-info" (click)="toggleDeactive()" >Yes</button>
+  </div>
+</ng-template>

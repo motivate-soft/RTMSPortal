@@ -1,0 +1,147 @@
+<!--BEGIN SIDEBAR MENU-->
+<nav id="sidebar" role="navigation" class="navbar-default navbar-static-side" [ngClass]="_showSideBar?'pWSideBarHeight':''" *ngIf="_showSideBar">
+
+  <div id="sidebar-collapse" data-toggle="collapse" data-target=".sidebar-collapse" class="sidebar-collapse collapse menu-scroll no-select" *ngIf="! _hideSideBarMenu">
+      <a id="menu-toggle"  class="hidden-xs" (click)="toggleCollapse()"  [attr.title]="! _isSidebarExpanded?'Click to Expand':'Click to Collapse Menu'"><i class="fa" [ngClass]="(!_isSidebarExpanded)?'fa-chevron-right':'fa-chevron-left'"></i></a>
+      <ul id="side-menu" class="nav sidebar-navigation-menu">
+          <li class="user-panel">
+              <div class="info">
+                  <div class="user-name">{{_userName}}</div>
+                  <ul class="list-inline list-unstyled">
+                      <li id="userSettings"><a class="user-panel-icon no-padding" [ngClass]="toggleHighlightedLink('home.userSettings')" (click)="navigate('home.userSettings')" data-hover="tooltip" title="My Settings"><i class="fa fa-cog"></i></a></li>
+                      <li id="inbox" *ngIf="_inboxEnabled">
+                          <a class="user-panel-icon no-padding" [ngClass]="toggleHighlightedLink('home.inbox')" (click)="navigate('home.inbox')" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a>
+                      </li>
+                      <li id="userManagement" *ngIf="_portalUserAdminEnabled"><a class="user-panel-icon no-padding"  [ngClass]="toggleHighlightedLink('home.userManagement')" (click)="navigate('home.userManagement')" data-hover="tooltip" title="User Management"><i class="fa fa-user-plus"></i></a></li>
+                      <li id="switchOrgListItem" *ngIf="_showSwitchOrgIcon"><a class="user-panel-icon no-padding"  (click)="showSwitchOrgModal()" data-hover="tooltip" title="Switch Organization"><i class="fa fa-users"></i></a></li>
+                      <li id="logout"><a class="user-panel-icon no-padding"  (click)="navigate('home.logout')" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                  </ul>
+              </div>
+              <div class="clearfix"></div>
+          </li>
+        <div class="panel-group-wrapper">
+          <div class="panel-group no-margin-bottom">
+              <div class="panel panel-default sidebar-panel">
+                  <div id="dashboards" class="panel-heading-menu sidebar-panel">
+                      <li href="#dashboard" (click)="toggleMenuIcon('Dashboards')" aria-expanded="true">
+                          <a><i class="fa fa-tachometer fa-fw"></i><span class="menu-title">Dashboards</span><span class="fa pull-right" [ngClass]="_collapseDashboard?'fa-angle-left':'fa-angle-down'"></span></a>
+                      </li>
+                  </div>
+                  <div id="dashboard" [ngClass]="_collapseDashboard?'panel-collapse collapse':''">
+                      <ul class="nav nav-second-level">
+                          <li id="pdpm_dashboard" class="list-group-item" *ngIf="_pdpmDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.pdpm')" (click)="navigate('home.pdpm')"><i class="fas fa-procedures"></i><span class="submenu-title">PDPM</span></a></li>
+                          <li id="enterprise_dashboard" class="list-group-item" *ngIf="_enterpriseDashboardEnabled" href="#enterpriseDashboard">
+                                <a (click)="toggleMenuIcon('enterpriseDashboards')">
+                                    <i class="icomoon icon-enterprise"></i>
+                                    <span class="submenu-title">Enterprise</span>
+                                    <span class="fa pull-right" [ngClass]="_collapseEnterpriseDashboards?'fa-angle-left':'fa-angle-down'"></span>
+                                </a>
+                            </li>
+
+                            <div id="enterpriseDashboard" [ngClass]="_collapseEnterpriseDashboards?'panel-collapse collapse':''">
+                                <ul class="nav nav-third-level">
+                                    <li id="enterprise_financial_dashboard" class="list-group-item" *ngIf=" _enterpriseDashboardEnabled && _enterpriseFinancialDashboardEnabled" >
+                                        <a [ngClass]="toggleHighlightedLink('home.enterpriseFinancialDashboard') " (click)="navigate('home.enterpriseFinancialDashboard')" class="enterprise-sub-menu">
+                                            <i class="fa fa-pie-chart"></i>
+                                            <span class="submenu-title">Financial Enterprise</span>
+                                        </a>
+                                    </li>
+                                    <li id="enterprise_clinical_dashboard" class="list-group-item" *ngIf=" _enterpriseDashboardEnabled && _enterpriseClinicalDashboardEnabled">
+                                        <a [ngClass]="toggleHighlightedLink('home.enterpriseClinicalDashboard')" (click)="navigate('home.enterpriseClinicalDashboard')" class="enterprise-sub-menu">
+                                            <i class="fa fa-heartbeat"></i>
+                                            <span class="submenu-title">Clinical Enterprise</span>
+                                        </a>
+                                    </li>
+                                    <li id="enterprise_proact_dashboard" class="list-group-item" *ngIf=" _enterpriseDashboardEnabled && _enterpriseProACTDashboardEnabled">
+                                        <a [ngClass]="toggleHighlightedLink('home.enterpriseProactDashboard')" (click)="navigate('home.enterpriseProactDashboard')" class="enterprise-sub-menu">
+                                            <i class="fa fa-refresh"></i>
+                                            <span class="submenu-title">PROACT Enterprise</span>
+                                        </a>
+                                    </li>
+                                    <li id="enterprise_pdpm_dashboard" class="list-group-item" *ngIf=" _enterpriseDashboardEnabled && _enterprisePDPMDashboardEnabled">
+                                        <a [ngClass]="toggleHighlightedLink('home.enterprisePDPMDashboard')" (click)="navigate('home.enterprisePDPMDashboard')" class="enterprise-sub-menu">
+                                            <i class="fas fa-procedures"></i>
+                                            <span class="submenu-title">PDPM Enterprise</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <li class="list-group-item" *ngIf="_careTransitionsDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.careTransitionsDashboard')" (click)="navigate('home.careTransitionsDashboard')"><i class="fa fa-exchange"></i><span class="submenu-title">Care Transitions</span></a></li>
+                            <li id="resident_dashboard" class="list-group-item" *ngIf="_residentDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.residentDashboard')" (click)="navigate('home.residentDashboard')"><i class="fas fa-laptop-medical"></i><span class="submenu-title">Resident</span></a></li>
+                            <li id="financial_dashboard" class="list-group-item" *ngIf="_financialDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.financial')" (click)="navigate('home.financial')"><i class="fa fa-pie-chart"></i><span class="submenu-title">Financial</span></a></li>
+                            <li id="clinical_dashboard" class="list-group-item" *ngIf="_clinicalDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.clinical')" (click)="navigate('home.clinical')"><i class="fa fa-heartbeat"></i><span class="submenu-title">Clinical</span></a></li>
+                            <li id="genericDashboard_dashboard" class="list-group-item" *ngIf="_realTimeLiteEnabled"><a  [ngClass]="toggleHighlightedLink('home.genericDashboard')" (click)="navigate('home.genericDashboard',6)"><i class="fa fa-bolt"></i><span class="submenu-title">Real Time Lite</span></a></li>
+                            <li id="rehospitalization_dashboard" class="list-group-item" *ngIf="_rehospEnabled"><a  [ngClass]="toggleHighlightedLink('home.rehospitalization')" (click)="navigate('home.rehospitalization')"><i class="fa fa-refresh"></i><span class="submenu-title">PROACT</span></a></li>
+                            <li id="hs_dashboard" class="list-group-item" *ngIf="_healthSystemEnabled"><a  [ngClass]="toggleHighlightedLink('home.hs')" (click)="navigate('home.hs')"><i class="fa fa-hospital-o"></i><span class="submenu-title">PROACT HS</span></a></li>
+                            <li id="hospitalDashboard_dashboard" class="list-group-item" *ngIf="_hospitalDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.hospitalDashboard')" (click)="navigate('home.hospitalDashboard')"><i class="fa fa-h-square"></i><span class="submenu-title">PROACT CM</span></a></li>
+                            <li id="infectionControl_dashboard" class="list-group-item" *ngIf="_infectionControlDashboardEnabled"><a  [ngClass]="toggleHighlightedLink('home.infectionControl')" (click)="navigate('home.infectionControl')"><i class="fas fa-shield-virus"></i><span class="submenu-title">Infection Control</span></a></li>
+                        </ul>
+                  </div>
+
+              </div>
+          </div>
+
+          <div class="panel-group no-margin-bottom">
+              <div id="admin_reports" class="panel panel-default sidebar-panel" *ngIf="_adminReportsEnabled">
+                  <div class="panel-heading-menu sidebar-panel">
+                      <li href="#reports" (click)="toggleMenuIcon('adminReports')">
+                          <a><i class="fa fa-files-o fa-fw"></i><span class="menu-title">Admin Reports</span><span class="fa pull-right" [ngClass]="_collapseReports?'fa-angle-left':'fa-angle-down'"></span></a>
+                      </li>
+                  </div>
+                  <div id="reports" [ngClass]="_collapseReports?'panel-collapse collapse':''">
+                      <ul class="nav nav-second-level">
+                          <li id="facilityPortalUsageReport" class="list-group-item" *ngIf="_facPortalUsageReportEnabled"><a [ngClass]="toggleHighlightedLink('home.facilityPortalUsageReport')" (click)="navigate('home.facilityPortalUsageReport')"><i class="fa fa-users"></i><span class="submenu-title">Facility Portal Usage Report</span></a></li>
+                          <li id="portalUsageReport" class="list-group-item" *ngIf="_portalUsageReportEnabled"> <a [ngClass]="toggleHighlightedLink('home.portalUsageReport')" (click)="navigate('home.portalUsageReport')"><i class="fa fa-lock"></i><span class="submenu-title">Portal Usage Report</span></a></li>
+                          <li id="keywordReport" class="list-group-item" *ngIf="_keywordReportEnabled"><a [ngClass]="toggleHighlightedLink('home.keywordReport')" (click)="navigate('home.keywordReport')"><i class="fa fa-key"></i><span class="submenu-title">Keyword List Report</span></a></li>
+                          <li id="utilizationScoreCard" class="list-group-item" *ngIf="_facUtilizationScoreCard"><a [ngClass]="toggleHighlightedLink('home.utilizationScoreCard')" (click)="navigate('home.utilizationScoreCard')"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Utilization Score Card</span></a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="panel-group no-margin-bottom">
+              <div id="reportSidebarLink" class="panel panel-default sidebar-panel" *ngIf="_reportsEnabled">
+                  <div class="panel-heading-menu sidebar-panel reportSidebarLink" >
+                      <li>
+                          <a [ngClass]="toggleHighlightedLink('home.reportsLanding')" (click)="navigate('home.reportsLanding')">
+                            <i class="fa fa-files-o fa-fw"></i><span class="menu-title">Reports</span></a>
+                      </li>
+                  </div>
+              </div>
+          </div>
+          <div id="inboxLink" class="panel-group no-margin-bottom" *ngIf="_inboxEnabled">
+              <div class="panel panel-default sidebar-panel">
+                  <div class="panel-heading-menu sidebar-panel">
+                      <li>
+                          <a [ngClass]="toggleHighlightedLink('home.inbox')" (click)="navigate('home.inbox')"><i class="fa fa-envelope"></i><span class="menu-title">Inbox</span></a>
+                      </li>
+                  </div>
+              </div>
+          </div>
+
+          <div id="documentationLink" class="panel-group no-margin-bottom" *ngIf="_documentationEnabled">
+            <div class="panel panel-default sidebar-panel">
+                <div class="panel-heading-menu sidebar-panel">
+                    <li>
+                        <a [ngClass]="toggleHighlightedLink('home.documentation')" (click)="navigate('home.documentation')"><i class="fab fa-dropbox"></i><span class="menu-title">Documentation</span></a>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+          <div class="panel-group no-margin-bottom">
+            <div class="footer">
+              <div class="footer-content reportSmallFont">Version <span [innerHTML]="_version"></span></div>
+                <div class="footer-content reportSmallFont" *ngIf="_isSidebarExpanded">
+                    <a href="mailto:help@realtimemed.com">help@realtimemed.com</a><br>
+                    888.546.9786<br>
+                    &copy;{{_currentYear}} Real Time Medical Systems LLC<br>
+                </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+  </div>
+</nav>
+<!--END SIDEBAR MENU-->
+
+<user-organization-edit #userOrgEditModal (userOrgEditFinished)="handleUserOrgEditFinished($event)"></user-organization-edit>

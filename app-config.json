@@ -1,0 +1,64 @@
+{
+  "buildNumber": "3.5.2",
+  "dev": {
+    "api": "http://localhost:47503/api/v1.0/",
+    "auth0": {
+      "clientID": "SAwA87Ypu2Ys8asXV5u41vZPLBDNhOM7",
+      "domain": "realtimemed-beta.auth0.com",
+      "audience": "http://beta.api.rtms.io"
+    }
+
+  },
+  "beta": {
+    "api": "https://qa.api.realtimemed.com/api/v1.0/",
+
+    "auth0": {
+      "clientID": "SAwA87Ypu2Ys8asXV5u41vZPLBDNhOM7",
+      "domain": "realtimemed-beta.auth0.com",
+      "audience": "http://beta.api.rtms.io"
+    }
+
+  },
+  "qa": {
+    "api": "https://qa.api.realtimemed.com/api/v1.0/",
+    "auth0": {
+      "clientID": "SAwA87Ypu2Ys8asXV5u41vZPLBDNhOM7",
+      "domain": "realtimemed-beta.auth0.com",
+      "audience": "http://beta.api.rtms.io"
+    }
+
+  },
+  "stage": {
+    "api": "https://stage.api.realtimemed.com/api/v1.0/",
+    "auth0": {
+      "clientID": "IVjrzigEr0r12x8gWIF8K8xD94401hv1",
+      "domain": "rudesyle.auth0.com",
+      "audience": "https://api.portal.realtime.com"
+    }
+
+  },
+  "demo": {
+    "api": "https://demo.api.realtimemed.com/api/v1.0/",
+    "auth0": {
+      "clientID": "IVjrzigEr0r12x8gWIF8K8xD94401hv1",
+      "domain": "rudesyle.auth0.com",
+      "audience": "https://api.portal.realtime.com"
+    }
+  },
+  "prod": {
+    "api": "https://portal.api.realtimemed.com/api/v1.0/",
+    "auth0": {
+      "clientID": "VK1vLdlcRUZ62WRMnahJdSc7UQ1iVmfF",
+      "domain": "realtimemed.auth0.com",
+      "audience": "https://portal.api.realtimemed.com"
+    }
+  },
+  "stagedemo": {
+    "api": "https://stage.demo.api.realtimemed.com/api/v1.0/",
+    "auth0": {
+      "clientID": "IVjrzigEr0r12x8gWIF8K8xD94401hv1",
+      "domain": "",
+      "audience": "https://stage.demo.api.realtime.com"
+    }
+  }
+}

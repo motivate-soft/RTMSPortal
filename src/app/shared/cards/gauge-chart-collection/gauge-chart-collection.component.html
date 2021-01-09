@@ -1,0 +1,30 @@
+<div class="container-fluid chart-container-wrapper gauge-collection-root no-padding" #gaugeCollection>
+    <div class="full-width">
+        <div class="gauge-collection no-padding" 
+        [ngClass]="{'col-xs-4': !singleColumn && !narrowContainer, 
+        'col-xs-12': singleColumn || narrowContainer, 'single-column': singleColumn || narrowContainer}" style="min-width: 110px;"
+            *ngFor="let card of seriesData">
+            <rtms-high-gauge 
+                        [chartName]="chartName" 
+                        [reportId]="reportId"
+                        [drillsIntoReportId]="drillsIntoReportId" 
+                        [seriesData]="seriesData" 
+                        (click)="allowOnClick && gaugeClicked(card)"
+                        [templateId]="templateId" 
+                        [facilityId]="facilityId" 
+                        [creditText]="creditText"
+                        [allowOnClick]="allowOnClick" 
+                        [chartConfig]="chartConfig"
+                        [tooltipFormat]="tooltipFormat"
+                        [valueDisplay]="card.Value"
+                        [valueTotal]="total"
+                        [cardColor]="card.CardColor"
+                        [yaxisDescription]="card.ItemName"
+                        [isSelected]="card.isSelectedGauge"
+                        [valueDescription]="card.ValueDescription"
+                        class="gaugecontainer"
+                        style="text-align:center;"
+                        [ngStyle]="{'color': card.CardColor}"></rtms-high-gauge>
+        </div>
+    </div>
+</div>

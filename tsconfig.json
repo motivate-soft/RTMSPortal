@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "importHelpers": true,
+    "outDir": "./dist/out-tsc",
+    "types": [
+      "jasmine"
+    ],
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "angular-momentjs": ["node_modules/angular-momentjs/angular-momentjs.min"],
+      "dropdowns-enhancement": ["node_modules/bootstrap_dropdowns_enhancement/dist/js/dropdowns-enhancement"],
+      "angular-cache-buster": ["Scripts/files/js/angular-cache-buster"],
+      "exporting": ["Scripts/files/js/exporting"],
+      "scrollintoview": ["Scripts/files/js/jquery.scrollintoview"],
+      "angular-bootstrap-toggle": ["node_modules/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min"],
+      "angular-busy": ["Scripts/files/js/angular-busy"],
+      "solid-gauge": ["node_modules/highcharts/modules/solid-gauge"],
+      "angular-intro": ["Scripts/files/js/angular-intro.min"]
+    }
+  }
+}

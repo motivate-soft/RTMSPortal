@@ -1,0 +1,9 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.tslint": true
+    },
+    "cSpell.words": [
+        "highcharts"
+    ],
+    "workbench.colorTheme": "Visual Studio Dark"
+}

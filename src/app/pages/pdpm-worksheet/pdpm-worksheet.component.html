@@ -1,0 +1,91 @@
+<div class="text-center detail_search detail_search_topmargin pull-right prn col-md-3 col-sm-3 col-xs-3">
+  <input class="pull-right" placeholder=" Search" [(ngModel)]="searchText" #search>
+</div>
+<div class="financialdetail_scroll">
+  <div class="fh-report-table pdpm-report">
+    <div *ngIf="data.seriesData">
+      <div *ngFor="let datam of data.seriesData|searchFilter: searchText" class="multi-report-item">
+        <table width="100%" class="table table-bordered ignore-table-limits">
+          <tr class="pdpm-header-table-color">
+            <td class="pdpm-td-spacing">
+              <div>
+                <span class="pdpm-span-label">
+                  <strong class="pdpm-resident-label">Resident:</strong>
+                  <rtms-resident-card-score-indicator [organizationId]="datam.OrganizationId" [reportId]="data.reportId"
+                    [reportName]="data.chartName" [riskLevel]="datam.RiskLevel" [resMrn]="datam.ResMRN">
+                  </rtms-resident-card-score-indicator>
+                  {{datam.Resident}}
+                </span>
+                <span class="pdpm-span-label">
+                  <strong>Unit</strong>: {{datam.UnitName}}
+                </span>
+                <span class="pdpm-span-label">
+                  <strong>Room Bed</strong>: {{datam.RoomBed}}
+                </span>
+              </div>
+              <div>
+                <span class="pdpm-span-label">
+                  <strong>Admit Date</strong>: {{formatDate(datam.AdmitDate) | date:'MM/dd/yyyy'}}
+                </span>
+                <span class="pdpm-span-label">
+                  <strong>Payer</strong>: {{datam.PayerName}}
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="pdpm-td-spacing">
+              <table width="100%" class="table table-bordered ">
+                <thead class="pdpm-data-table-color">
+                  <tr>
+                    <td class="pdpm-section-width">Section</td>
+                    <td class="pdpm-mds-width">MDS Item</td>
+                    <td class="pdpm-description-width">Condition/Description</td>
+                    <td class="pdpm-founddate-width">Date Found</td>
+                    <td class="pdpm-location-width">Location Found</td>
+                    <td class="pdpm-notes-width">Notes</td>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let section of datam.Sections; let isEven=even" [class.pdpm-alt-color]="isEven">
+                  <tr>
+                    <td class="pdpm-section-width">
+                      <div *ngIf="hasSectionChanged(section.SectionCode,datam.ResMRN)">
+                        Section {{section.SectionCode}}
+                      </div>
+                    </td>
+                    <td class="pdpm-mds-width">
+                      {{section.MdsItem}}
+                    </td>
+                    <td class="pdpm-description-width">
+                      {{section.PdpmItem}}
+                    </td>
+                    <td class="pdpm-founddate-width">
+                      {{formatDate(section.DateFound) | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td class="pdpm-location-width">
+                      {{section.ItemLocation}}
+                    </td>
+                    <td class="pdpm-notes-width" [innerHTML]="section.PdpmNote">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <p></p>
+      </div>
+      <div class="tableFooter-legal">NOTE: This worksheet is intended to aid subscribers in their review of the Patient Driven Payment Model.
+        Resources: FY 2019 SNF PPS Final Rulemaking, CMS Fact sheet: PDPM Patient Classification, and CMS draft PDPM Calculation Worksheet for SNFs.
+        Real Time has made every attempt to ensure the accuracy and reliability of the information provided. Real Time does not accept any
+        responsibility or liability for the accuracy, content, and completeness of the information.</div>
+      </div>
+  </div>
+  <div *ngIf="data.seriesData && data.seriesData.length <= 0">
+    <ng-container *ngTemplateOutlet="itemTemplateForNoDataFound;context:{}">
+    </ng-container>
+  </div>
+</div>
+<ng-template let-text="text" let-alignLeft="alignLeft" #itemTemplateForNoDataFound>
+    <rtms-no-data-found [noDataMessage]="text"></rtms-no-data-found>
+</ng-template>

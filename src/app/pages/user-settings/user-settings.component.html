@@ -1,0 +1,60 @@
+<div id="wrapper">
+    <!--BEGIN PAGE WRAPPER-->
+    <div id="page-wrapper" class="page-wrapper">
+        <!--BEGIN TITLE & BREADCRUMB PAGE-->
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <div class="page-header pull-left">
+                <div class="page-title">My Settings</div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--END TITLE & BREADCRUMB PAGE-->
+        <!--BEGIN CONTENT-->
+        <div class="page-content alt-background-color">
+            <div class="row">
+                <div class="col-lg-3">&nbsp;</div>
+                <div class="col-lg-6">
+                    <form>
+                        <h3><b>My Profile</b></h3>
+
+                        <div style="margin-bottom: 10px;">
+                            <b>First Name</b> : {{user.FirstName}}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <b>Last Name</b> : {{user.LastName}}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <b>Email Address</b> : {{user.EmailId}}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <b>Facility</b> : <select class="form-control input-sm form-combobox" name="facility"
+                                [(ngModel)]="selectedFacility" (change)="saveFacility()"
+                                style="width: 60%; display: inline;">
+                                <option [ngValue]=null>[Select Default Facility]</option>
+                                <option *ngFor="let selectedFacility of facility"
+                                    [ngValue]="selectedFacility">{{selectedFacility.OrganizationName}}</option>
+                            </select>
+                        </div>
+                        <hr size="30">
+                        <div [hidden]="user.IsSSO">
+                            <h4>
+                                Change Password
+                            </h4>
+                            <rtms-password-change [passwordChangeIsValid]="passwordChangeIsValid" (keydown.enter)="canHitEnter(passwordChangeIsValid)"
+                                [requireCurrentPassword]="requireCurrentPassword" (changed)="passwordValueChanged($event)" #passwordChangeComponent></rtms-password-change>
+                            <div class="form-group text-center">
+                                <br />
+                                <button type="submit" class="btn btn-info" (click)="submit()"
+                                    [disabled]="!passwordChangeIsValid">Change Password &nbsp;<i
+                                        class="fa fa-chevron-circle-right"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--END CONTENT-->
+        <rtms-feedback></rtms-feedback>
+        <!--END PAGE WRAPPER-->
+    </div>
+</div>

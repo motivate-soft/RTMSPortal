@@ -1,0 +1,31 @@
+.page-content .fixed-height-report {
+  height: calc(100vh - 90px);
+}
+
+.active-text {
+  color: green;
+  cursor: pointer;
+}
+
+.inactive-text {
+  color: red;
+  cursor: pointer;
+}
+
+.confirm-modal .modal-body {
+  min-height: 70px;
+}
+
+.toggle-on, .toggle-off {
+  padding-top: 6px;
+}
+
+.btn-info.toggle-on:hover, .toggle.btn-info:hover {
+  background-color: #0074bd;
+  border-color: #0074bd;
+}
+
+.toggle.btn.btn-xs {
+  height: 29px !important;
+  width: 50px !important;
+}

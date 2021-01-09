@@ -1,0 +1,20 @@
+<div class="resident-detail-care-transitions" *ngFor="let resident of seriesData;">
+  <div class="row" >
+    <div class="col-md-5 resident-name-size"><strong>Resident: </strong> {{resident.Resident}} </div>
+    <div class="col-md-3"><strong>Payer: </strong> {{resident.PayerName}}</div>
+    <div class="col-md-2"><strong>Age: </strong> {{resident.Age}}</div>
+    <div class="col-md-2"><strong>Room #: </strong> {{resident.RoomBed}}</div>
+
+  </div>
+  <div class="row resident-detail-row-padding">
+    <div class="col-md-5"><strong>Admission Date: </strong> {{resident.AdmissionDateFormatted}}</div>
+    <div class="col-md-5"><strong>Skilled Services: </strong> {{resident.SkilledServices}}</div>
+    <div class="col-md-2"><strong>Care Level: </strong> {{resident.CareLevelCode}}</div>
+  </div>
+  <div class="row resident-detail-row-padding">
+    <div class="col-md-2"><strong>LOS: </strong> {{resident.Los}}</div>
+    <div class="col-md-4"><strong>Weight Bearing Status: </strong> {{resident.WeightBearingStatus}}</div>
+    <div class="col-md-4"><strong>Discharge Plan: </strong> {{resident.DischargePlan}}</div>
+    <div class="col-md-2"><strong>POLST: </strong> {{resident.POLSTStatus}}</div>
+  </div>
+</div>

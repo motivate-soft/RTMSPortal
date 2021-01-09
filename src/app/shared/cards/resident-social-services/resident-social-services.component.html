@@ -1,0 +1,17 @@
+<div class="resident-social-services-card" *ngFor="let resident of seriesData;">
+    <div class="row">
+      <div class="col-md-4"><strong>Maritial Status: </strong>{{resident.MaritalStatus}}</div>
+      <div class="col-md-4"><strong>DME Owned: </strong>{{resident.DMEOwned}}</div>
+      <div class="col-md-4"><strong>Home Care Services: </strong>{{resident.HomeCareServices}}</div>
+    </div>
+    <div class="row resident-social-services-row-padding">
+      <div class="col-md-4"><strong>Previously Lived With: </strong>{{resident.PreviouslyLivedWith}}</div>
+      <div class="col-md-4"><strong>Support Provided in Previous setting: </strong>{{resident.SupportProvidedPreviousSetting}} </div>
+      <div class="col-md-4"><strong>Hours of assist in Previous setting: </strong>{{resident.HoursAssistPreviousSetting}} </div>
+    </div>
+    <div class="row resident-social-services-row-padding">
+      <div class="col-md-4"><strong>Previous Home Enviroment: </strong>{{resident.PreviousHomeEnvironment}}</div>
+      <div class="col-md-4"><strong>Assistance Provided in Previous setting: </strong>{{resident.AssistanceProvidedInPreviousSetting}} </div>
+      <div class="col-md-4"><strong>Hours of assist upon Discharge: </strong>{{resident.HoursAssistUponDischarge}} </div>
+    </div>
+  </div>

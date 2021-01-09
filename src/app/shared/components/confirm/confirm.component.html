@@ -1,0 +1,20 @@
+<ng-template #confirmModalTemplate>
+    <div class="modal-header">
+      <div class="modal-header-primary">
+          <span class="modal-title">{{title}}</span>
+      </div>
+    </div>
+    <div class="modal-body" *ngIf="template">
+      <ng-container *ngTemplateOutlet="template">
+      </ng-container>
+    </div>
+    <div class="modal-body" *ngIf="body" >
+      <div class="col-md-12">
+        {{body}}
+      </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="hideChildModal()">No</button>
+        <button type="button" class="btn btn-info" (click)="onConfirm()">Yes</button>
+    </div>
+  </ng-template>

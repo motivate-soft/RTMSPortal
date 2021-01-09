@@ -1,0 +1,21 @@
+<div class="number-widget-container container">
+    <div *ngIf="options">
+        <div class="number-widget" *ngFor="let item of data; let idx = index"
+            (click)="(item.HasValue || item[options.hasValueProp]) && allowOnClick && getDrillDown(item,popover)"
+            [ngClass]="numberWidgetClass" [ngStyle]="{'height': options.height}">
+            <div class="inner-container" [ngStyle]="getStyle(item)" >
+                <div class="value border" [ngStyle]="getValueStyle(item)">
+                    <div [ngClass]="options.size" class="value valign-middle">{{item.Value || item[options.valueProp]}}
+                    </div>
+                    <div class="number-widget-label" [ngClass]="options.labelClass">
+                        {{options.header || item[options.headerProp]}}</div>
+                </div>
+                <div class="numberwidget-header" [ngClass]="options.size">
+                    <div class="header-sub">{{options.subHeader || item[options.subHeaderProp]}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<rtms-resident-vitals-by-category #residentVitalByCategoryComponent >

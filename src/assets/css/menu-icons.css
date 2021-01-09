@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'menu-icons';
+  src:  url('./fonts/menu-icons.eot?gdzqli');
+  src:  url('./fonts/menu-icons.eot?gdzqli#iefix') format('embedded-opentype'),
+    url('./fonts/menu-icons.ttf?gdzqli') format('truetype'),
+    url('./fonts/menu-icons.woff?gdzqli') format('woff'),
+    url('./fonts/menu-icons.svg?gdzqli#icon-menu') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.menu-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'menu-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

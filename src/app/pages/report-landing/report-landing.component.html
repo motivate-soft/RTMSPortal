@@ -1,0 +1,49 @@
+<div id="wrapper">
+    <!--BEGIN PAGE WRAPPER-->
+    <div id="page-wrapper" class="page-wrapper">
+        <!--BEGIN TITLE & BREADCRUMB PAGE-->
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+          <div class="page-header pull-left">
+              <div class="page-title">
+                Reports
+              </div>
+          </div>
+          <div class="clearfix"></div>
+      </div>
+
+        <div class="col-md-12 prx ptl">
+            <div class="col-xs-6 col-md-4 pull-right">
+                <input type="text" class="form-control" [(ngModel)]="_searchQuery" placeholder="Search Reports" [ngModelOptions]="{standalone: true}"
+                  (input)="onSearchChange($event.target.value)"/>
+            </div>
+        </div>
+
+        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+        <div class="page-content alt-background-color">
+          <div id="ReportGroup_{{reportGroup.Id}}" *ngFor="let reportGroup of _reportGroupList">
+            <div [hidden]="! groupHasReports(reportGroup.Id)">
+                <div class="report-category"><i [class]="reportGroup.IconClass"></i><span class="pls">{{reportGroup.Name}}</span></div>
+                <div class="reports-headerline"><hr class="headerline" /></div>
+                <div>
+                  <div class='flexible-cont'>
+                    <div *ngFor="let report of filterReportsByGroup(reportGroup.Id)">
+                        <div [hidden]="!report.isVisible || ! report.ReportImage" class='flexible-cont__flex-item' id="reportGroup_{{reportGroup.Id}}_reportId_{{report.ReportId}}">
+                            <a (click)="navigate(reportGroup, report)" class='flexible-cont__link'>
+                                <img class='flexible-cont__icon-img' [src]='report.ReportImage' *ngIf="report.ReportImage">
+                                <div class='flexible-cont__icon-title'> {{report.ReportName}}</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!--END CONTENT-->
+        <div>
+            <rtms-feedback></rtms-feedback>
+        </div>
+    </div>
+    <!--END PAGE WRAPPER-->
+    <rtms-tour [dashboardId]="dashboardId" [showIntro]="true"></rtms-tour>
+</div>

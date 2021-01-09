@@ -1,0 +1,117 @@
+<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+  <div class="page-header" [ngClass]="{ 'care-transition': isCareTransitionsDashboard}">
+    <div class="page-title center-align">
+      <div class="pull-right">
+        <span [hidden]="!(!reportsVm.showMenu && showBackToButton)" class="facility-view">
+          <a class="btn btn-default btn-small" (click)="goBack(backButtonHref)">
+            <i class="fa fa-fw" [ngClass]="backButtonIconClass"></i>
+            <span class="hidden-xs hidden-sm">&nbsp;{{backButtonText}}</span>
+          </a>
+        </span>
+        <span [hidden]="!(!reportsVm.showMenu && drillDownHistory && drillDownHistory.length > 1)" class="facility-view"
+          *ngFor="let r of drillDownHistory | slice:0:drillDownHistory.length-1;let idx = index">
+          &nbsp;<a [hidden]="r.chartName == '' || r.chartName == currentDisplayReport" class="btn btn-default btn-small"
+            (click)="reportsVm.retrieveParent($event,r,idx)" title="{{r.chartName}}"><span> {{ r.chartName | slice:0:10 }}
+              {{r.chartName.length > 10 ? '...' : ''}}</span></a>
+        </span>
+      </div>
+
+        <div class="page-title-text rp_title" [ngClass]="!reportsVm.showMenu && showBackToButton ? 'limited' : ''" style="float: left;">
+          <div *ngIf="!isResidentDashboard && !isCareTransitionsDashboard">
+            <span [ngClass]="isCareTransitionsDashboard || isProactHsDashboard || isEnterprise() ? 'hidden-xs hidden-sm' : ''">{{reportTitle}}</span>
+            <div class="clearfix"></div>
+          </div>
+            <div *ngIf="isResidentDashboard" class="hidden-xs hidden-sm"><i class="fa fa-laptop-medical"></i></div>
+            <div *ngIf="isCareTransitionsDashboard" class="hidden-xs hidden-sm"><i class="fa fa-exchange"></i></div>
+        </div>
+
+      <div class="page-title-group">
+        <span [hidden]="reportsVm.selectedOrganization == '' || hideFacilityName"  [ngClass]="isProactHsDashboard || isEnterprise() ? 'facility-view no-wrap' : 'facility-view no-wrap hidden-xs'">
+            <img [hidden]="isResidentDashboard || isCareTransitionsDashboard || isProactHsDashboard" class="header-facilityicon header-facilityicon-margin" src="src/assets/images/facility.png">&nbsp;&nbsp;
+
+          <span class="hidden-xs hidden-sm"
+            [hidden]="!(!allowChangeOrg || userMultipleOrganizations.length == 1)"> {{getSelectedOrgName()}}</span>
+          <span [hidden]="!(allowChangeOrg && userMultipleOrganizations.length > 1)" class="multiselect-wrapper change-facility ngSelect">
+            <span style="float:right">
+              <rtms-facility-selector [displayMode]="displayMode"></rtms-facility-selector>
+            </span>
+          </span>
+        </span>
+
+          <span class="dashboard-filter-margin pull-right" *ngIf="isCareTransitionsDashboard || isResidentDashboard">
+
+          <rtms-resident-pager [showRoomBedSort]="isCareTransitionsDashboard"></rtms-resident-pager>
+          <button class="btn btn-info btn-sm btn-add-filter dashboard-filter-margin btn-export btn-small" data-hover="Export Data"
+            title="Filter" (click)="exportAll()" style="margin: 0px 10px;">
+            <i class="fa fa-download"></i> <span class="hidden-xs hidden-sm">&nbsp;Export</span>
+          </button>
+        </span>
+        <span [hidden]="!hideFacilityName" class="blank_space">
+          &nbsp;
+          <!-- whitespace for Title to remain aligned -->
+        </span>
+
+        <span [hidden]="!(!reportsVm.showMenu && showFilter)" class="pull-right">
+          <button class="btn btn-info btn-sm btn-add-filter dashboard-filter-margin filter-button-margin btn-filtr btn-small" data-hover="Show/Hide Filter"
+            title="Filter" (click)="showFilterClicked(true)">
+            <i class="fa fa-filter"></i><span class="hidden-xs hidden-sm">&nbsp;Filter</span><!--JSR-FILTER-->
+          </button>
+        </span>
+
+        <span [hidden]="!(!reportsVm.showMenu && showUnits)" class="facility-view">
+          <label [hidden]="!hasValue(reportsVm.filterUnits)" class="btn btn-default dashboard-breadcrumb-margins btn-small"
+            title="{{reportsVm.filterUnits}}">
+            <i class="fa fa-filter" title="Units Filter"
+              (click)="reportsVm.showFilter(false)"></i>&nbsp;{{reportsVm.filterUnits | slice:0:10}}&nbsp;&nbsp;&nbsp;<i
+              class="fa fa-times" title="Remove Units" (click)="reportsVm.removeUnitsFilter()"></i>
+          </label>
+        </span>
+
+        <span [hidden]="!(!reportsVm.showMenu && showQms)" class="facility-view">
+          <label
+            [hidden]="!reportsVm.filterQMTypes"
+            class="btn btn-default dashboard-breadcrumb-margins btn-small" title="{{reportsVm.filterQMTypes}}">
+            <i class="fa fa-filter" title="QM Types Filter"
+              (click)="reportsVm.showFilter(false)"></i>&nbsp;{{reportsVm.filterQMTypes | slice:0:10}}&nbsp;&nbsp;&nbsp;<i
+              class="fa fa-times" title="Remove Qm Types" (click)="reportsVm.removeQMTypesFilter()"></i>
+          </label>
+        </span>
+        <span [hidden]="!(!reportsVm.showMenu && showPayers)" class="facility-view">
+          <label [hidden]="!hasValue(reportsVm.filterPayers)" class="btn btn-default dashboard-breadcrumb-margins btn-small"
+            title="{{reportsVm.filterPayers}}">
+            <i class="fa fa-filter" title="Payers Filter"
+              (click)="reportsVm.showFilter(false)"></i>&nbsp;{{reportsVm.filterPayers | slice:0:10}}&nbsp;&nbsp;&nbsp;<i
+              class="fa fa-times" title="Remove Payers" (click)="reportsVm.removePayersFilter()"></i>
+          </label>
+        </span>
+        <span [hidden]="!(!reportsVm.showMenu && showCategories)" class="facility-view">
+          <label [hidden]="!reportsVm.filterCategories"
+            class="btn btn-default dashboard-breadcrumb-margins btn-small" title="{{reportsVm.filterCategories}}">
+            <i class="fa fa-filter" title="Categories Filter"
+              (click)="reportsVm.showFilter(false)"></i>&nbsp;{{reportsVm.filterCategories | slice:0:10}}&nbsp;&nbsp;&nbsp;<i
+              class="fa fa-times" title="Remove Categories" (click)="reportsVm.removeCategoriesFilter()"></i>
+          </label>
+        </span>
+        <span [hidden]="!(!reportsVm.showMenu && showTypes)" class="facility-view">
+          <label [hidden]="!reportsVm.filterType"
+            class="btn btn-default dashboard-breadcrumb-margins btn-small" title="{{reportsVm.filterType}}">
+            <i class="fa fa-filter" title="Show Type Filter"
+              (click)="reportsVm.showFilter(false)"></i>&nbsp;{{reportsVm.filterType | slice:0:10}}&nbsp;&nbsp;&nbsp;<i
+              class="fa fa-times" title="Remove Types" (click)="reportsVm.removeTypeFilter()"></i>
+          </label>
+        </span>
+        <span [hidden]="!(!reportsVm.showMenu && showDischargeOnly)" class="facility-view">
+          <label [hidden]="!reportsVm.dischargeOnlyFilter"
+            class="btn btn-default dashboard-breadcrumb-margins btn-small" title="Show Only Discharged Residents">
+            <i class="fa fa-filter" title="Show Discharge Only Filter"
+              (click)="reportsVm.showFilter(false)"></i>&nbsp;Discharged Only&nbsp;<i class="fa fa-times"
+              title="Remove Discharge Only" (click)="reportsVm.removeDischargedOnlyFilter()"></i>
+          </label>
+        </span>
+      </div>
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <rtms-tour [dashboardId]="dashboardId" [showIntro]="true"></rtms-tour>
+</div>

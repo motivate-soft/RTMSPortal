@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | RTMS</title>
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href="/src/assets/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" href="src/assets/css/main.css?v=1494295925015">
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="src/assets/css/style.css?v=1494295925015" id="theme-change">
+    <link type="text/css" rel="stylesheet" href="src/assets/css/style-responsive.css?v=1494295925015">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        try {
+            var xdr = new XDomainRequest();
+            var api = 'http://localhost:50001/api/v1.0/';
+
+            xdr.open("get", api + "application-info/check-auto-redirect");
+            xdr.onload = function () {
+                var response = $.parseJSON(xdr.responseText);
+                if (response == null || typeof (response) == 'undefined') {
+                    response = $.parseJSON(data.firstChild.textContent);
+                }
+                if (response.Item.AutoRedirectUrl != null && response.Item.AutoRedirectUrl !== '') {
+                    window.location = response.Item.AutoRedirectUrl;
+                }
+            };
+            xdr.send();
+        }
+        catch (err) {
+            console.log(err);
+        }
+    </script>
+</head>
+<body>
+    <div ng-controller="LoginCtrl as loginVM">
+        <form class="form">
+            <div class="panel">
+                <div class="incompatible-container body-content col-lg-4">
+                    <div class="row">
+                        <div class="form-group text-center"><img src="/src/assets/images/logo-rtms.png" alt="Logo"></div>
+                    </div>
+                    <br>
+                    <div class="forget-password">
+                        <p class="incompatible-paragraph">
+                            It looks like your web browser is not new enough to get a good experience on the Real Time Portal.
+                            Currently, RTMS supports the following browsers:
+                        </p>
+                        <div class="incompatible-browserlist" style="margin-left: 15px;">
+                            <ul>
+                                <li class="incompatible-browserlist-item">Google Chrome</li>
+                                <li class="incompatible-browserlist-item">Mozilla Firefox</li>
+                                <li class="incompatible-browserlist-item">Internet Explorer 11</li>
+                                <li class="incompatible-browserlist-item">Microsoft Edge</li>
+                                <li class="incompatible-browserlist-item">Safari</li>
+                            </ul>
+                        </div>
+                        <p class="incompatible-paragraph">
+                            If you are using Internet Explorer 11 or Microsoft Edge, and are receiving this message, please check your browser’s
+                            document compatibility mode.  You can follow steps <a href="https://myrtms.com/wp-content/uploads/2017/05/Real-Time-Portal-Internet-Explorer-Settings.pdf">here</a> to verify it:
+                            If you are unsure how to proceed, please check with your Desktop or IT Support Team to resolve this.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

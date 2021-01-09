@@ -1,0 +1,91 @@
+<div>
+  <form ngNativeValidate class="form" (ngSubmit)="step === 2 ? login() : next()" #captchaProtectedForm="ngForm">
+    <div class="panel divlogin">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4">&nbsp;</div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="body-content col-lg-12 col-md-12 col-sm-12 " *ngIf="!isOlderBrowser">
+            <div class="row">
+              <div class="form-group text-center">
+                <a href="http://myrtms.com" target="_blank">
+                  <img src="/src/assets/images/logo-rtms.png" alt="Logo" class="img-responsive" />
+                </a>
+              </div>
+            </div>
+            <div class="header-content">
+              <h1>
+                Log In
+                <a (click)="help()" class="help pull-right cursor" data-hover="tooltip" title="Help">
+                  <i class="fa fa-question-circle"></i>
+                </a>
+              </h1>
+            </div>
+            <div class="form-group" *ngIf="loginFailMessage !== ''">
+              <span class="errorText" [innerHTML]="loginFailMessage">
+                <span *ngIf="showReactivationSupportMessage">To reset your password, please call our support line at
+                  888-546-9786, option 1.</span>
+              </span>
+            </div>
+            <div class="login-container">
+              <div @usernameAnimation *ngIf="step === 1" class="username-container">
+                <div class="form-group">
+                  <div class="input-icon">
+                    <i class="fa fa-user"></i>
+                    <input id="username" type="text" size="25" placeholder="Username or Email" name="username"
+                      [(ngModel)]="username" class="form-control" autocomplete="username" required>
+                  </div>
+                </div>                
+                <div class="form-group text-center">
+                  <button type="button" class="btn btn-info" data-style="zoom-out" data-spinner-size="20"
+                    data-spinner-color="white" (click)="next()" (keyup)="$event.keyCode === 13 && next()"
+                    [ladda]="nextLoading" [disabled]="username === '' ">
+                    Next &nbsp;
+                    <i class="fa fa-chevron-circle-right"></i>
+                  </button>
+                </div>
+                <div class="text-center" >Version <span [innerHTML]="version"></span></div>
+                
+              </div>
+              <div @passwordAnimation *ngIf="step === 2" class="password-container">
+                <div class="form-group">
+                  <div class="input-icon">
+                    <i class="fa fa-key"></i>
+                    <input id="password" type="password" size="25" placeholder="Password" name="Password"
+                      [(ngModel)]="password" class="form-control" required autocomplete="new-password" />
+                  </div>
+                </div>
+                <div class="form-group text-center" *ngIf="reCaptchaIsVisible()">
+                  <re-captcha name="captcha" #captchaControl="ngModel" style="display: inline-block;" (resolved)="handleReCaptchaResolved($event)" siteKey="{{reCaptchaSiteKeyV2}}" [(ngModel)]="reCaptchaVal"></re-captcha>
+                </div>
+                <div class="form-group text-center">
+                  <button type="button" class="btn btn-dark" data-style="zoom-out" data-spinner-size="20"
+                    data-spinner-color="white" (click)="back()">
+                    Back &nbsp;
+                    <i class="fa fa-chevron-circle-left"></i>
+                  </button>
+                  <button type="submit" class="btn btn-info m-l-3" [ladda]="loginLoading" data-style="zoom-out"
+                    data-spinner-size="20" data-spinner-color="white" (keyup)="$event.keyCode === 13 && login()">
+                    Log In &nbsp;
+                    <i class="fa fa-chevron-circle-right"></i>
+                  </button>
+                </div> 
+                <div class="clearfix"></div>
+                <div class="forget-password text-center">
+                  <h4>Forgotten your Password?</h4>
+                  <p>
+                    no worries, click
+                    <a (click)="reset()" class='btn-forgot-pwd cursor'>here</a> to reset your password.
+                  </p>
+                </div>
+                <div class="text-center" >Version <span [innerHTML]="version"></span></div>
+                <br />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">&nbsp;</div>
+      </div>
+    </div>
+  </form>
+</div>

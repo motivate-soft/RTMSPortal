@@ -1,0 +1,27 @@
+<div class="notificationsubjectwrap">
+  <span [ngClass]="{'notificationbell': this._hasNotifications}" (click)="displayNotification()" *ngIf="this._hasNotifications"></span>
+
+   <span *ngIf="this._hasNotifications">
+      <a class="notificationsubject underline" (click)="displayNotification()" [innerHTML]="this._subjectDisplay"></a>
+  </span>
+
+  <ng-template #notificationPopup>
+    <div class="modal-header">
+      <div class="modal-header-primary">
+          <span class="modal-title">Notification/Warnings</span>
+      </div>
+  </div>
+    <div class="modal-body">
+      <div class="row" *ngFor="let i of this._notifications">
+        <div class="col-md-12 text-primary">
+            <h4>{{i.SubjectDisplay}} </h4>
+        </div>
+        <div class="col-md-12" [innerHTML]="i.Message">
+        </div>
+      </div>
+      </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeModal()">OK</button>
+    </div>
+  </ng-template>
+</div>
